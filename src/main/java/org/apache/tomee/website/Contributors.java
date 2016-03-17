@@ -50,8 +50,10 @@ public class Contributors {
         // no-op
     }
 
-    public static Contributor singleLoad(final WebTarget target, final String address) throws IOException {
-        final String hash = gravatarHash(address);
+    public static Contributor singleLoad(final WebTarget target, final String input) throws IOException {
+        final boolean committer = input.endsWith("*");
+        final String mail = committer ? input.substring(0, input.length() - 1) : input;
+        final String hash = gravatarHash(mail);
         final Response gravatar = target.path(hash + ".json").request(MediaType.APPLICATION_JSON_TYPE).get();
         if (gravatar.getStatus() != 200) {
             return null;
@@ -63,7 +65,7 @@ public class Contributors {
                         .name(
                                 ofNullable(e.getName())
                                         .map(n -> ofNullable(n.getFormatted()).orElse(ofNullable(n.getGivenName()).orElse("") + ofNullable(n.getFamilyName()).orElse("")))
-                                        .orElseGet(() -> ofNullable(e.getDisplayName()).orElse(ofNullable(e.getPreferredUsername()).orElse(address))))
+                                        .orElseGet(() -> ofNullable(e.getDisplayName()).orElse(ofNullable(e.getPreferredUsername()).orElse(mail))))
                         .description(e.getAboutMe())
                         .link(
                                 Stream.concat(
@@ -76,7 +78,8 @@ public class Contributors {
                                         .collect(toList()))
                         .gravatar("http://www.gravatar.com/avatar/" + hash)
                         .build())
-                .orElse(Contributor.builder().name(address).id(address).build());
+                .orElse(Contributor.builder().name(mail).id(mail).build());
+        contributor.setCommitter(committer);
         ofNullable(contributor.getLink()).ifPresent(l -> Collections.sort(l, (o1, o2) -> o1.getName().compareTo(o2.getName())));
         return contributor;
     }
@@ -144,6 +147,7 @@ public class Contributors {
     @Builder
     public static class Contributor {
         private String id;
+        private boolean committer;
         private String name;
         private String description;
         private String gravatar;

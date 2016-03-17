@@ -149,4 +149,22 @@ jQuery(function($) {
 	$(window).on("resize", function() {
 		$('.modal:visible').each(centerModal);
 	});
+
+    $(document).ready(function() { // if there is any file tree
+        $('#filetree').each(function (i , v) {
+            var self = $(this);
+            self.tree({
+                data: eval(self.find('p')[0].innerHTML),
+                closedIcon: $('<i class="fa fa-folder-o"</i>;'),
+                openedIcon: $('<i class="fa fa-folder-open-o"</i>')
+            });
+            self.bind(
+                'tree.click',
+                function(event) {
+                    var node = event.node;
+                    $('#filetreedetail').html(node.description);
+                }
+            );
+        });
+    });
 });

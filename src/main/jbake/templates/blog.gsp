@@ -3,19 +3,19 @@
 	<%include "menu.gsp"%>
 
     <div class="container section-padded">
-        <div class="row title">
-            <h2>${content.title}</h2>
-        </div>
         <div class="row">
             <div class="col-md-12">
-                <%published_posts.each {post ->%>
+                <%
+                last = published_posts.size() - 1
+                published_posts.eachWithIndex {post, idx ->
+                %>
                     <a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>${post.uri}"><h1>${post.title}</h1></a>
-                    <%if (post.date) {%><p><small>${post.date.format("dd MMMM yyyy")}</small></p><% } %>
+                    <%if (post.date) {%><p><small>${post.date}</small></p><% } %>
                     <p>${post.body}</p>
+                    <% if (idx != last) { %><hr /><% } %>
                 <%}%>
-                <hr />
 
-                <p>Older posts are available in the <a href="/${config.archive_file}">archive</a>.</p>
+                <!--p>Older posts are available in the <a href="/${config.archive_file}">archive</a>.</p>-->
             </div>
         </div>
     </div>

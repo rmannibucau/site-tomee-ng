@@ -206,7 +206,7 @@ nav.navbar-fixed-top .navbar-nav > li > a:not(.btn) {
 
 .btn:hover,
 .btn:focus {
-	color: white;
+	color: #CE2D34;
 }
 
 .btn.btn-blue {
@@ -282,7 +282,7 @@ section {
 }
 
 .section-padded {
-	padding: 80px 0 40px;
+	padding: 50px 0 40px;
 }
 
 .cut-top {
@@ -673,7 +673,7 @@ section {
 /* Footer */
 
 footer {
-	padding: 140px 0 40px;
+	padding: 60px 0 40px;
     background-image:linear-gradient(to right, #f59423, #e2632a, #ca2136, #832778);
 	-webkit-background-size: cover;
 	background-size: cover;
@@ -718,9 +718,6 @@ footer .opening-hours {
 	margin-top: 60px;
 }
 
-footer .bottom-footer {
-	margin-top: 150px;
-}
 
 footer .social-footer {
 	padding: 0;
@@ -1131,7 +1128,7 @@ footer .social-footer li:hover a {
 
 
 .contributor-name {
-    color: #16658a;
+    color: #80287a;
     font-size: 1.7em;
     margin-bottom: 0.5em;
 }
@@ -1141,4 +1138,32 @@ footer .social-footer li:hover a {
     box-shadow: 0 1px 3px rgba(0,0,0,0.055);
     border-radius: 4px;
     padding: 4px;
+}
+
+
+.bs-callout {
+    min-height: 160px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+.bs-callout code {
+    border-radius: 3px;
+}
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+.bs-callout-primary {
+    border-left-color: #80287a;
+}
+.bs-callout-primary h4 {
+    color: #80287a;
 }

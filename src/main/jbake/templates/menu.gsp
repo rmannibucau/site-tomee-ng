@@ -29,7 +29,9 @@
 					<li><a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>developer/index.html">Developer</a></li>
 					<li><a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>admin/index.html">Admin</a></li>
 					<li><a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>advanced/index.html">Advanced</a></li>
+					<li><a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>security/index.html">Security</a></li>
 					<li><a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>blog/index.html">Blog</a></li>
+					<li><a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>community/index.html">Community</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
