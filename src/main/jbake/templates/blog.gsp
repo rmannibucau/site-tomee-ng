@@ -3,6 +3,11 @@
 	<%include "menu.gsp"%>
 
     <div class="container section-padded">
+        <div class="row title">
+            <div class='page-header'>
+              <h2>Last posts</h2>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <%
