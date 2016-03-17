@@ -2,22 +2,16 @@
 
 == Build
 
-Build relies on Maven and JBake. To get started use:
-
-[source]
-----
-mvn jbake:generate
-----
-
-For development `mvn jbake:inline` starts a server on http://localhost:8080 and auto refreshes
-pages after updates.
-
 To build the final website just use:
 
 [source]
 ----
 mvn compile pre-site
 ----
+
+For development `mvn jbake:inline` starts a server on http://localhost:8080 and auto refreshes
+pages after updates but you need to have called `compile pre-site` before.
+
 
 Then website is generated in `target/site-${version}` and you just need to sync it with CMS repo.
 

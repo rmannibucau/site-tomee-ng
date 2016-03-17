@@ -46,7 +46,7 @@ body {
 
 /* Typography */
 
-p {
+.bigp {
 	font-size: 18px;
 	line-height: 1.5;
 	color: #80287a;
@@ -282,7 +282,7 @@ section {
 }
 
 .section-padded {
-	padding: 140px 0 40px;
+	padding: 80px 0 40px;
 }
 
 .cut-top {
@@ -1130,4 +1130,15 @@ footer .social-footer li:hover a {
 }
 
 
+.contributor-name {
+    color: #16658a;
+    font-size: 1.7em;
+    margin-bottom: 0.5em;
+}
 
+.photo {
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.055);
+    border-radius: 4px;
+    padding: 4px;
+}
