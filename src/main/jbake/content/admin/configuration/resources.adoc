@@ -1,0 +1,86 @@
+= Resources
+:jbake-date: 2016-03-16
+:jbake-type: page
+:jbake-status: published
+:jbake-tomeepdf:
+
+In TomEE resources are mainly "singleton" (understood as defined once per server or application). Technically
+it can be anything but you will probably meet more Datasources than other type of resources.
+
+=== Definition a resource: how does it work?
+
+Before all let see how properties syntax is equivalent to XML one (system.properties and tomee.xml typically).
+
+Properties syntax uses dot notation to represent setters/properties which are plain properties in XML syntax
+and a URL syntax with query parameters to define the resource where it is directly the resource and tag attributes in XML.
+Finally the id is an attribute in XML and the key of the resource definition in properties.
+
+Let see it with a sample, both delcarations are the same:
+
+[source,properties]
+----
+myDataSource = new://Resource?type=DataSource
+myDataSource.JdbcUrl = jdbc:hsqldb:mem:site
+myDataSource.UserName = sa
+----
+
+[source,xml]
+----
+<Resource id="myDataSource" type="DataSource">
+  JdbcUrl = jdbc:hsqldb:mem:site
+  UserName = sa
+</Resource>
+----
+
+From there we'll use the XML syntax which is likely the most use at the moment for the samples.
+
+=== Factory syntax
+
+Here are the attributes of a resource:
+
+|===
+| Name | Optional |Description
+| id | false | name of the resource, will match `openejb:Resource/id` in JNDI tree.
+| provider | true | define a default resource definition using service-jar.xml
+| class-name | true |specify which class to instantiate
+| factory-name | true |specify which method to invoke on the class-name when specified to create the resource
+| properties-provider | true |a class responsible to provide to tomee the properties to use, it can have a property `serviceId` to know which resource it is.
+| classpath | true | a classpath to use to create the resource. Note: if not implementing an interface the resource will be isolated from the applications.
+| aliases | true | other names for the resource, allows for instance to share the same pool for a datasource used with multiple names in applications.
+| post-construct/pre-destroy | true | methods called when creating/destroying the resources.
+|===
+
+=== Common Resources
+
+==== DataSources
+
+DataSources have defaults for all values and a default datasource can be provided automatically but if you want to
+configure it here are the common properties:
+
+You can set the boolean `JtaManaged` to false if you don't want your datasource to be using JTA - if you manage transactions yourself.
+
+Then other configurations are linked the pool the datasource is using. By default TomEE uses https://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html[tomcat-jdbc] but we also provide
+https://commons.apache.org/proper/commons-dbcp/configuration.html[commons-dbcp] (2 for TomEE 7.x and 1 for TomEE 1.x).
+The properties are then the related configurations with these particular
+entries we try to keep in sync for both:
+
+|===
+| Name|Description
+| JdbcDriver | the jdbc driver of the datasource
+| JdbcUrl | the jdbc url of the datasource
+| Username | the user to use
+| Password | the password of the user
+|===
+
+TomEE also provides few utilities you can add in DataSource properties:
+
+|===
+| Name | Description
+| LogSql | Should SQL be logged (using TomEE logger)
+| LogSqlPackages | if set the logging will show the matching packages (separated by comma) inline when logging the query, allows to know where a query comes from
+| Flushable| if true the datasource can be casted as a Flushable to recreate the pool
+| ResetOnError | if a `SQLException` happens the pool is automatically recreated. Configuration is either "true" to do it each time an exception occurs, `x` or `retry(x)` to do it and retry until maximum `x` times
+| ResetOnErrorMethods | which methods are handled by ResetOnError
+| TomEEProxyHandler | Custom `InvocationHandler` wrapping the datasource calls
+| DataSourceCreator | which pool to use, `dbcp`, `tomcat`, `dbcp-alternative` (DBCP and TomEE proxying instead of DBCP JTA integration), `simple` (no pooling)
+|===

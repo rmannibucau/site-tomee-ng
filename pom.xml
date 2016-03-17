@@ -44,6 +44,16 @@
       <artifactId>cxf-rt-rs-client</artifactId>
       <version>3.1.5</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.tomee</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomee</groupId>
+      <artifactId>openejb-core</artifactId>
+      <version>7.0.0-M3</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -110,6 +120,16 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-client</artifactId>
             <version>3.1.5</version>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.tomee</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.tomee</groupId>
+            <artifactId>openejb-core</artifactId>
+            <version>7.0.0-M3</version>
           </dependency>
         </dependencies>
       </plugin>

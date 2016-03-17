@@ -5,4 +5,9 @@
 :jbake-tomeepdf:
 
 
-TBD
+=== Session clustering
+
+TomEE fully relies on Tomcat clustering: https://tomcat.apache.org/tomcat-7.0-doc/cluster-howto.html[Tomcat Clustering].
+
+The configuration is mainly in `conf/server.xml` and since TomEE 7 CDI `@SessionScoped` is transparently clustered
+through the session.
