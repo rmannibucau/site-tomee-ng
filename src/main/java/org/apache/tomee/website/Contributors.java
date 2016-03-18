@@ -119,7 +119,7 @@ public class Contributors {
             Thread.interrupted();
             return Collections.emptyList();
         }
-        Collections.sort(contributors, (o1, o2) -> o1.id.compareTo(o2.id));
+        Collections.sort(contributors, (o1, o2) -> o1.name.compareTo(o2.id));
         return contributors;
     }
 

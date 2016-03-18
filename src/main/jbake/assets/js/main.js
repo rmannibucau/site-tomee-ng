@@ -162,7 +162,7 @@ jQuery(function($) {
                 'tree.click',
                 function(event) {
                     var node = event.node;
-                    $('#filetreedetail').html(node.description);
+                    if (node.description) {$('#filetreedetail').html(node.description);}
                 }
             );
         });
