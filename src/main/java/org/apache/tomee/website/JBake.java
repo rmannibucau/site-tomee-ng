@@ -29,6 +29,8 @@ import static lombok.AccessLevel.PRIVATE;
 @RequiredArgsConstructor(access = PRIVATE)
 public class JBake {
     public static void main(final String[] args) throws Exception {
+        System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "64"); // try to have parallelStream better than default
+
         final File source = args == null || args.length < 1 ? new File("src/main/jbake") : new File(args[0]);
         final File pdfSource = new File(source, "content");
         final File destination = args == null || args.length < 2 ? new File("target/site-tmp") : new File(args[1]);

@@ -1,10 +1,14 @@
-= Download
+= Application Composer Advanced Usage
 :jbake-date: 2016-03-16
 :jbake-type: page
 :jbake-status: published
 :jbake-tomeepdf:
 
-ApplicationComposer can be a way to run a JBatch not needing any HTTP connector. Here is a sample:
+ApplicationComposer can be a way to run a JBatch not needing any HTTP connector.
+
+Here is an example making batch integration easy - note you can extract the generic part in a library very easily:
+
+TIP: if you didn't check yet BatchEE provides some standalone utilities for JBatch but the idea of this page can be reused for a lot of applications.
 
 [source,java]
 ----
