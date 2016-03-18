@@ -15,7 +15,6 @@ import java.nio.file.Path;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -65,7 +64,7 @@ public class JBake {
 
         build.run();
         if (startHttp) {
-            final Path watched = destination.toPath();
+            final Path watched = source.toPath();
             final WatchService watchService = watched.getFileSystem().newWatchService();
             watched.register(watchService, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
             final AtomicBoolean run = new AtomicBoolean(true);
@@ -103,9 +102,6 @@ public class JBake {
 
                 @Override
                 public void run() {
-                    if (System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).contains("win")) {
-                        System.err.println("The polling can just not work on windows, sorry for that. Use 'b' to force the build if so.");
-                    }
                     while (run.get()) {
                         try {
                             final WatchKey key = watchService.poll(1, TimeUnit.SECONDS);

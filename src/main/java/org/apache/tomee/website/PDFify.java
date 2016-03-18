@@ -26,6 +26,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +49,9 @@ public class PDFify {
                         final String path = sourceBase.relativize(file).toString();
                         final File target = new File(targetBase, path.substring(0, path.length() - "adoc".length()) + "pdf");
                         final File asFile = file.toFile();
-                        if (asciidoctor.readDocumentHeader(asFile).getAttributes().containsKey("jbake-tomeepdf")) {
+                        final Map<String, Object> attributes = asciidoctor.readDocumentHeader(asFile).getAttributes();
+                        // if we generate the PDF link we need to create the PDF excepted if it is expected to be manual
+                        if (attributes.containsKey("jbake-tomeepdf") && !attributes.containsKey("jbake-tomeepdf-manual")) {
                             asciidoctor.convertFile(
                                     asFile,
                                     options().backend("pdf").toFile(target).get());
