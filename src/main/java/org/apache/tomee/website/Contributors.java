@@ -25,8 +25,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -84,11 +84,11 @@ public class Contributors {
         return contributor;
     }
 
-    public static Collection<Contributor> load(final String txtFile) throws IOException { // used in page.gsp
+    public static Collection<Contributor> load(final String contributorsList) throws IOException { // used in page.gsp
         final WebTarget target = ClientBuilder.newClient().register(new JohnzonProvider()).target(GRAVATAR_BASE);
         final List<Contributor> contributors = new ArrayList<>();
         final ExecutorService es = Executors.newFixedThreadPool(16);
-        try (final BufferedReader reader = new BufferedReader(new FileReader("src/main/jbake/content/" + txtFile))) {
+        try (final BufferedReader reader = new BufferedReader(new StringReader(contributorsList))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 line = line.trim();

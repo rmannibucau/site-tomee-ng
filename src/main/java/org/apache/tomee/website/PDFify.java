@@ -16,6 +16,7 @@
  */
 package org.apache.tomee.website;
 
+import lombok.RequiredArgsConstructor;
 import org.asciidoctor.Asciidoctor;
 
 import java.io.File;
@@ -23,23 +24,19 @@ import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import static lombok.AccessLevel.PRIVATE;
 import static org.asciidoctor.OptionsBuilder.options;
 
+@RequiredArgsConstructor(access = PRIVATE)
 public class PDFify {
-    private PDFify() {
-        // no-op
-    }
-
-    public static void main(final String[] args) throws IOException {
-        final Path sourceBase = Paths.get(args[0]);
-        final File targetBase = new File(args[1]);
+    public static void generatePdf(final File from, final File targetBase) throws IOException {
+        final Path sourceBase = from.toPath();
         final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
         final ExecutorService pool = Executors.newFixedThreadPool(16);
         Files.walkFileTree(sourceBase, new SimpleFileVisitor<Path>() {
@@ -59,7 +56,6 @@ public class PDFify {
                         }
                     });
                 }
-                // TODO: read adoc, generate PDF, link it to each page as a download link (adding a template in templates will make it easy
                 return super.visitFile(file, attrs);
             }
         });

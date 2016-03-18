@@ -6,16 +6,18 @@ To build the final website just use:
 
 [source]
 ----
-mvn compile pre-site
+mvn compile
 ----
 
-For development `mvn jbake:inline` starts a server on http://localhost:8080 and auto refreshes
-pages after updates but you need to have called `compile pre-site` before.
+For development `mvn compile -Djbake.http=true` starts a server on http://localhost:8080 and auto refreshes
+pages after updates.
 
 
 Then website is generated in `target/site-${version}` and you just need to sync it with CMS repo.
 
 NOTE: it also opens the door to documentation versioning with subfolder per version like maven does.
+
+TIP: the rendering is just a main so if the process doesn't work for you just enrich it in `JBake` class.
 
 == Extensions
 

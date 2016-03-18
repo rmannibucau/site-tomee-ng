@@ -1,6 +1,10 @@
 = Wall of fame
 :jbake-date: 2016-03-16
-:jbake-type: page
+:jbake-type: contributors
 :jbake-status: published
-:jbake-tomeecontributors: contributors.txt
 
+agumbrecht@tomitribe.com*
+jlmonteiro@apache.org*
+jonathan.gallimore@gmail.com*
+rmannibucau@gmail.com*
+struberg@yahoo.de*

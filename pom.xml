@@ -7,10 +7,13 @@
   <groupId>org.apache.tomee</groupId>
   <artifactId>site</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <properties>
-    <itextpdf.version>5.5.8</itextpdf.version>
-  </properties>
   <name>Apache TomEE :: WebSite NG</name>
+
+  <properties>
+    <tomee.version>7.0.0-M3</tomee.version>
+    <jbake.http>false</jbake.http>
+    <jbake.pdf>true</jbake.pdf>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -51,8 +54,29 @@
     </dependency>
     <dependency>
       <groupId>org.apache.tomee</groupId>
-      <artifactId>openejb-core</artifactId>
-      <version>7.0.0-M3</version>
+      <artifactId>tomee-embedded</artifactId>
+      <version>${tomee.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jbake</groupId>
+      <artifactId>jbake-core</artifactId>
+      <version>2.4.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>jul-to-slf4j</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy</artifactId>
+      <version>2.3.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-templates</artifactId>
+      <version>2.3.6</version>
     </dependency>
   </dependencies>
 
@@ -68,79 +92,13 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>br.com.ingenieux</groupId>
-        <artifactId>jbake-maven-plugin</artifactId>
-        <version>0.0.9</version>
-        <executions>
-          <execution>
-            <id>default-generate</id>
-            <phase>pre-site</phase>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.jbake</groupId>
-            <artifactId>jbake-core</artifactId>
-            <version>2.4.0</version>
-          </dependency>
-          <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-templates</artifactId>
-            <version>2.4.6</version>
-          </dependency>
-          <dependency> <!-- for .adoc or .asciidoctor or .ad -->
-            <groupId>org.asciidoctor</groupId>
-            <artifactId>asciidoctorj</artifactId>
-            <version>1.5.4</version>
-          </dependency>
-          <dependency> <!-- for .md -->
-            <groupId>org.pegdown</groupId>
-            <artifactId>pegdown</artifactId>
-            <version>1.4.2</version>
-          </dependency>
-          <dependency>
-            <groupId>org.asciidoctor</groupId>
-            <artifactId>asciidoctorj-pdf</artifactId>
-            <version>1.5.0-alpha.11</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-json_1.0_spec</artifactId>
-            <version>1.0-alpha-1</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.johnzon</groupId>
-            <artifactId>johnzon-jaxrs</artifactId>
-            <version>0.9.3-incubating</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-client</artifactId>
-            <version>3.1.5</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.tomee</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.tomee</groupId>
-            <artifactId>openejb-core</artifactId>
-            <version>7.0.0-M3</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.4.0</version>
         <executions>
           <execution>
-            <id>generate-pdf</id>
-            <phase>pre-site</phase>
+            <id>tomee-site</id>
+            <phase>compile</phase>
             <goals>
               <goal>java</goal>
             </goals>
@@ -148,10 +106,12 @@
         </executions>
         <configuration>
           <includeProjectDependencies>true</includeProjectDependencies>
-          <mainClass>org.apache.tomee.website.PDFify</mainClass>
+          <mainClass>org.apache.tomee.website.JBake</mainClass>
           <arguments>
-            <argument>${project.basedir}/src/main/jbake/content</argument>
+            <argument>${project.basedir}/src/main/jbake/</argument>
             <argument>${project.build.directory}/${project.build.finalName}</argument>
+            <argument>${jbake.http}</argument>
+            <argument>${jbake.pdf}</argument>
           </arguments>
         </configuration>
       </plugin>
