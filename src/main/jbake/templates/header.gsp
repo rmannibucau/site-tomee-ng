@@ -20,6 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>fonts/font-awesome-4.1.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>fonts/eleganticons/et-icons.css">
 	<link rel="stylesheet" type="text/css" href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>css/jqtree.css">
+	<link rel="stylesheet" type="text/css" href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>css/idea.css">
 	<link rel="stylesheet" type="text/css" href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>css/cardio.css">
 </head>
 

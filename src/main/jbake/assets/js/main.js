@@ -150,7 +150,8 @@ jQuery(function($) {
 		$('.modal:visible').each(centerModal);
 	});
 
-    $(document).ready(function() { // if there is any file tree
+    $(document).ready(function() {
+        // if there is any file tree
         $('#filetree').each(function (i , v) {
             var self = $(this);
             self.tree({
@@ -165,6 +166,11 @@ jQuery(function($) {
                     if (node.description) {$('#filetreedetail').html(node.description);}
                 }
             );
+        });
+
+        // code snippet
+        $('pre code').each((i, block) => {
+            hljs.highlightBlock(block);
         });
     });
 });

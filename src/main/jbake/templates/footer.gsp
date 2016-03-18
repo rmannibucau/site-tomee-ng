@@ -52,6 +52,7 @@
 	<script src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>js/typewriter.js"></script>
 	<script src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>js/jquery.onepagenav.js"></script>
 	<script src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>js/tree.jquery.js"></script>
+	<script src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>js/highlight.pack.js"></script>
     <script src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>js/main.js"></script>
 </body>
 

@@ -56,7 +56,7 @@ since TomEE 7.x: you can skip it and use @Classes directly on the ApplicationCom
 [source,java]
 ----
 @Module public WebApp app() { return new WebApp(); }
----
+----
 
 The expected returned type of these methods are in org.apache.openejb.jee package:
 
