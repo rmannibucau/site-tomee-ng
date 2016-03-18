@@ -88,7 +88,8 @@ public class Contributors {
         final WebTarget target = ClientBuilder.newClient().register(new JohnzonProvider()).target(GRAVATAR_BASE);
         final List<Contributor> contributors = new ArrayList<>();
         final ExecutorService es = Executors.newFixedThreadPool(16);
-        try (final BufferedReader reader = new BufferedReader(new StringReader(contributorsList))) {
+        final String rawList = contributorsList.substring(contributorsList.indexOf("<pre>") + "<pre>".length(), contributorsList.indexOf("</pre>"));
+        try (final BufferedReader reader = new BufferedReader(new StringReader(rawList))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 line = line.trim();

@@ -19,15 +19,7 @@
               <div class="text-center" style="padding-bottom: 2em;">A <i class="fa fa-star-o" style="color:#F38F24;"></i> means the contributor is also a committer.</div>
               <ul>
                 <%
-                    def loader = this.class.classLoader
-                    try { // ensure we already added target/classes to the build
-                        loader.loadClass('org.apache.tomee.website.Contributors')
-                    } catch (java.lang.ClassNotFoundException cnfe) {
-                        loader.addURL(new java.io.File("target/classes").toURI().toURL())
-                    }
-                    def path = content.uri + "/../" + content.get('tomeecontributors');
-                    def contributors =loader.loadClass('org.apache.tomee.website.Contributors').getMethod('load', String).invoke(null, path)
-                    contributors.each {contributor ->
+                    org.apache.tomee.website.Contributors.load(content.body).each {contributor ->
                 %>
                   <div class="col-sm-4">
                     <div class="photo col-sm-5">
