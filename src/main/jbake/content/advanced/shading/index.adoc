@@ -4,4 +4,7 @@
 :jbake-status: published
 :jbake-tomeepdf:
 
-As a main etc...how to use it with jbatch...not testing which is in dev part
+This page is under construction, you can for now consult http://www.tomitribe.com/blog/2015/03/50-shades-of-tomee/[Tomitribe post] on the topic.
+
+TIP: TomEE doesn't provide a particular plugin to do a shade of openejb-core or tomee-embedded cause the standard shade plugin works,
+you just need to take care of few resource merges like mentionned in the post.
