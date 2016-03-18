@@ -6,6 +6,7 @@
 
 === Server
 
+[.table.table-bordered,options="header"]
 |===
 |Name	|Value|	Description
 |openejb.embedded.remotable|	bool|	activate or not the remote services when available
@@ -69,7 +70,7 @@
 
 === Client
 
-
+[.table.table-bordered,options="header"]
 |===
 |Name|	Value	|Description
 |openejb.client.identityResolver	|implementation of org.apache.openejb.client.IdentityResolver|	default org.apache.openejb.client.JaasIdentityResolver. The class to get the client identity.

@@ -49,6 +49,7 @@ private DataSource dataSource;
 
 Here are the attributes of a resource:
 
+[.table.table-bordered,options="header"]
 |===
 | Name | Optional |Description
 | id | false | name of the resource, will match `openejb:Resource/id` in JNDI tree.
@@ -69,6 +70,7 @@ will ignore implicit properties.
 
 Implicit properties are:
 
+[.table.table-bordered,options="header"]
 |===
 | Name | Description
 | transactionManager | The JTA transaction manager
@@ -98,6 +100,7 @@ https://commons.apache.org/proper/commons-dbcp/configuration.html[commons-dbcp] 
 The properties are then the related configurations with these particular
 entries we try to keep in sync for both:
 
+[.table.table-bordered,options="header"]
 |===
 | Name|Description
 | JdbcDriver | the jdbc driver of the datasource
@@ -126,6 +129,7 @@ ds.PasswordCipher = Static3DES
 
 TomEE also provides few utilities you can add in DataSource properties:
 
+[.table.table-bordered,options="header"]
 |===
 | Name | Description
 | LogSql | Should SQL be logged (using TomEE logger)
