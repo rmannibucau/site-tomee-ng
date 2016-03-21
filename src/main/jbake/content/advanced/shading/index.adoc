@@ -50,3 +50,6 @@ Here is a maven shade plugin configuration working for most cases:
 NOTE: see link:../tomee-embedded/index.html[TomEE Embedded] page for more information about tomee embedded options.
 
 IMPORTANT: this shade uses TomEE Embedded but you can do the same with an link:../applicationcomposer/index.html[Application Composer] application.
+
+TIP: if you have `META-INF/web-fragment.xml` in your application you will need to merge them in a single one in the shade. Note that tomcat provides one
+which can be skipped in this operation since it is there only as a marker for jasper detection.
