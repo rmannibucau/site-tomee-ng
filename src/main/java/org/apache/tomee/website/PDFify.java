@@ -18,6 +18,7 @@ package org.apache.tomee.website;
 
 import lombok.RequiredArgsConstructor;
 import org.asciidoctor.Asciidoctor;
+import org.asciidoctor.AttributesBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class PDFify {
                         if (attributes.containsKey("jbake-tomeepdf") && !attributes.containsKey("jbake-tomeepdf-manual")) {
                             asciidoctor.convertFile(
                                     asFile,
-                                    options().backend("pdf").toFile(target).get());
+                                    options().backend("pdf").attributes(AttributesBuilder.attributes().attribute("source-highlighter", "coderay")).toFile(target).get());
                             System.out.println("Generated " + target);
                         }
                     });
