@@ -171,7 +171,7 @@ jQuery(function($) {
         });
 
         // code snippet
-        $('pre code').each((i, block) => {
+        $('pre code').each(function (i, block){
             hljs.highlightBlock(block);
         });
     });
