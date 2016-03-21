@@ -5,7 +5,7 @@
         <div class="row title">
             <div class='page-header'>
               <%if (content.containsKey('tomeepdf')) {%>
-              <div class='btn-toolbar pull-right'>
+              <div class='btn-toolbar pull-right' style="z-index: 2000;">
                 <div class='btn-group'>
                     <a class="btn" href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>${content.uri.replace('html', 'pdf')}"><i class="fa fa-file-pdf-o"></i> Download as PDF</a>
                 </div>
