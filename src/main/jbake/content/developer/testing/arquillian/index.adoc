@@ -254,7 +254,7 @@ Sample:
    <property name="serverXml">conf/server.xml</property>
 
    <!-- tomee zip to use -->
-   <property name="groupId">org.apache.openejb</property>
+   <property name="groupId">org.apache.tomee</property>
    <property name="artifactId">apache-tomee</property>
    <property name="version">LATEST</property>
    <property name="type">zip</property>

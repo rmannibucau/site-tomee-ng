@@ -15,7 +15,7 @@ The minimum required one is openejb-core:
 [source,xml]
 ----
 <dependency>
-  <groupId>org.apache.openejb</groupId>
+  <groupId>org.apache.tomee</groupId>
   <artifactId>openejb-core</artifactId>
   <version>${openejb.version></version>
 </dependency>
@@ -26,7 +26,7 @@ If you need JAXRS services you'll add (or replace thanks to transitivity of mave
 [source,xml]
 ----
 <dependency>
-  <groupId>org.apache.openejb</groupId>
+  <groupId>org.apache.tomee</groupId>
   <artifactId>openejb-cxf-rs</artifactId>
   <version>${openejb.version></version>
 </dependency>
@@ -37,7 +37,7 @@ If you need JAXWS services you'll add (or replace thanks to transitivity of mave
 [source,xml]
 ----
 <dependency>
-  <groupId>org.apache.openejb</groupId>
+  <groupId>org.apache.tomee</groupId>
   <artifactId>openejb-cxf</artifactId>
   <version>${openejb.version></version>
 </dependency>
