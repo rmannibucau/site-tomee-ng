@@ -13,6 +13,8 @@
     <tomee.version>7.0.0-M3</tomee.version>
     <jbake.http>false</jbake.http>
     <jbake.pdf>false</jbake.pdf>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <dependencies>
