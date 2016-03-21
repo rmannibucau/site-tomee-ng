@@ -1,7 +1,7 @@
 <%include "header.gsp"%>
 	
 	<%include "menu.gsp"%>
-	<div class="container section-padded">
+	<div id="main-block" class="container section-padded">
         <div class="row title">
             <div class='page-header'>
               <%if (content.containsKey('tomeepdf')) {%>

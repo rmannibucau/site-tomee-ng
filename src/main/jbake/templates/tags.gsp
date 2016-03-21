@@ -2,6 +2,7 @@
 
 	<%include "menu.gsp"%>
 
+	<div id="main-block">
 	<div class="page-header">
 		<div class="container">
 			<div class="row">
@@ -31,6 +32,7 @@
 		<% last_month = post.date.format("MMMM yyyy")%>
 		<%}%>
 	</ul>
+	</div>
 	</div>
 	
 <%include "footer.gsp"%>

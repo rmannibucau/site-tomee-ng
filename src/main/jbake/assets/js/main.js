@@ -70,9 +70,11 @@ jQuery(function($) {
 	});
 
 	// Window Resize
-	$(window).resize(function() {
-		$('header').height($(window).height());
-	});
+	var resizeContent = function() {
+        $('#main-block').css('min-height', $(window).height() - $('footer').height() - (40 + 60) /*header/footer padding*/);
+    };
+	$(window).resize(resizeContent);
+	resizeContent();
 
 	// Pricing Box Click Event
 	$('.pricing .box-main').click(function() {

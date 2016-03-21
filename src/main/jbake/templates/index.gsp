@@ -1,6 +1,7 @@
 <%include "header.gsp"%>
 	<%include "menu.gsp"%>
-	<header id="intro">
+  <div id="main-block">
+    <header id="intro">
         <div class="container">
             <div class="table">
                 <div class="header-text">
@@ -52,4 +53,5 @@
 			</div>
 		</div>
 	</section>
+  </div>
 <%include "footer.gsp"%>

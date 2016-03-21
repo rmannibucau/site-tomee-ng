@@ -12,7 +12,7 @@
   <properties>
     <tomee.version>7.0.0-M3</tomee.version>
     <jbake.http>false</jbake.http>
-    <jbake.pdf>true</jbake.pdf>
+    <jbake.pdf>false</jbake.pdf>
   </properties>
 
   <dependencies>

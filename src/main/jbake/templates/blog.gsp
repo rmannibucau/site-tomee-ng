@@ -2,7 +2,7 @@
 
 	<%include "menu.gsp"%>
 
-    <div class="container section-padded">
+    <div id="main-block" class="container section-padded">
         <div class="row title">
             <div class='page-header'>
               <h2>Last posts</h2>

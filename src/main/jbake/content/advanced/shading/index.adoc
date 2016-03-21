@@ -4,7 +4,49 @@
 :jbake-status: published
 :jbake-tomeepdf:
 
-This page is under construction, you can for now consult http://www.tomitribe.com/blog/2015/03/50-shades-of-tomee/[Tomitribe post] on the topic.
+Shading the container and the application has some challenges like merging correctly resources (`META-INF/services/` typically).
 
-TIP: TomEE doesn't provide a particular plugin to do a shade of openejb-core or tomee-embedded cause the standard shade plugin works,
-you just need to take care of few resource merges like mentionned in the post.
+Here is a maven shade plugin configuration working for most cases:
+
+[source,xml]
+----
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-shade-plugin</artifactId>
+  <version>2.3</version>
+  <executions>
+    <execution>
+      <phase>package</phase>
+      <goals>
+        <goal>shade</goal>
+      </goals>
+      <configuration>
+        <dependencyReducedPomLocation>${project.build.directory}/reduced-pom.xml</dependencyReducedPomLocation>
+        <transformers>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+            <mainClass>org.apache.tomee.embedded.Main</mainClass>
+          </transformer>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+            <resource>META-INF/cxf/bus-extensions.txt</resource>
+          </transformer>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+            <resource>META-INF/openwebbeans/openwebbeans.properties</resource>
+          </transformer>
+        </transformers>
+        <filters>
+          <filter> <!-- we don't want JSF to be activated -->
+            <artifact>*:*</artifact>
+            <excludes>
+              <exclude>META-INF/faces-config.xml</exclude>
+            </excludes>
+          </filter>
+        </filters>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+----
+
+NOTE: see link:../tomee-embedded/index.html[TomEE Embedded] page for more information about tomee embedded options.
+
+IMPORTANT: this shade uses TomEE Embedded but you can do the same with an link:../applicationcomposer/index.html[Application Composer] application.
