@@ -85,7 +85,7 @@ public class Downloads {
                 .collect(toList())
                 .forEach(d ->
                         System.out.println("" +
-                                "|" + d.name +
+                                "|" + d.name + (d.classifier.isEmpty() ? "" : (" " + d.classifier)) +
                                 "|" + d.version +
                                 "|" + d.date +
                                 "|" + d.size + " MB " +
@@ -135,13 +135,14 @@ public class Downloads {
         final String artifactId = base.substring(base.lastIndexOf('/') + 1, base.length());
         final String artifactBase = version.base + "/" + version.version + "/" + artifactId + "-" + version.version;
         return version.extensions.stream()
-                .flatMap(e -> (version.classifiers.isEmpty() ? Stream.of("") : version.classifiers.stream().map(c -> "-" + c)).map(c -> c + "." + e))
-                .map(e -> toDownload(artifactId, version.version, e.substring(e.indexOf('.') + 1), artifactBase + e));
+                .flatMap(e -> (version.classifiers.isEmpty() ? Stream.of(new ArtifactDescription("", e)) : version.classifiers.stream().map(c -> new ArtifactDescription(c, e))))
+                .map(a -> toDownload(artifactId, a.classifier, version.version, a.extension, artifactBase + (a.classifier.isEmpty() ? '.' + a.extension : ('-' + a.classifier + '.' + a.extension))));
     }
 
-    private static Download toDownload(final String artifactId, final String version, final String format, final String url) {
+    private static Download toDownload(final String artifactId, final String classifier, final String version, final String format, final String url) {
         return new Download(
                 WordUtils.capitalize(artifactId.replace('-', ' ')).replace("Openejb", "OpenEJB").replace("Tomee", "TomEE"),
+                classifier,
                 version,
                 format,
                 url,
@@ -182,8 +183,15 @@ public class Downloads {
     }
 
     @Data
+    public static class ArtifactDescription {
+        private final String classifier;
+        private final String extension;
+    }
+
+    @Data
     public static class Download {
         private final String name;
+        private final String classifier;
         private final String version;
         private final String format;
         private final String url;
