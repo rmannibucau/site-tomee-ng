@@ -273,5 +273,63 @@ public class MyTest {
 }
 ----
 
+=== Start and Deploy once
+
+When having a huge suite of test it can be long to start/deploy/undeploy/shutdown he container/application for each method.
+
+That's why `SingleApplicationComposerRunner` allows to just reuse the same instance accross several test.
+
+The first test will start and deploy the application and then other tests will reuse this instance until the JVM is destroyed
+where the server/application will be undeployed/shutdown.
+
+
+Here a simple usage:
+
+[source,java]
+----
+import org.apache.openejb.testing.SingleApplicationComposerRunner;
+// other imports
+
+@RunWith(SingleApplicationComposerRunner.class)
+public class MyTest {
+    @Inject
+    private ACdiBean bean;
+
+    @Application
+    private TheModel model;
+
+    @Test
+    public void aTest() {
+        // ...
+    }
+}
+----
+
+TIP: if you need a real TomEE container then you can have a look to `TomEEEmbeddedSingleRunner` which does deploys the classpath
+using tomee-embedded.
+
+==== Configure what to deploy
+
+As all tests will reuse the same application the model (the class declaring the application with `@Classes`, `@Module` etc...) needs to be extracted from the test class itself.
+
+The application lookup uses this strategy (ordered):
+
+- the fully qualified name is read from the system property `tomee.application-composer.application`
+- a *single* class decorated with `@Application` is looked in the jar/folder containing the test class
+
+If you have several "groups" you can use JUnit `@Category` to differentiate them and write one application class by category. Then
+in `surefire` plugin you declare two `executions` enforcing the system property `tomee.application-composer.application` for each of them
+and the associated `@Category`.
+
+==== Available injections
+
+- If the application model class uses `@RandomPort` then the test classes can get it as well
+- CDI injections are supported
+- `@Application` on a field allows to get the application model to get injected
+
+Compared to a standalone usage it misses all other EE injections (`@PersistenceContext`, `@Resource` etc... but you can inject them in the application model
+and just expose them or wrap them in your tests thanks to the `@Application` field.
+
+
 === Going further
 If you want to learn more about ApplicationComposer see link:../../../advanced/applicationcomposer/index.html[ApplicationComposer Advanced] page.
