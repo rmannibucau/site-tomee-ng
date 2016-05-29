@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.apache.johnzon.jaxrs.JohnzonProvider;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
@@ -55,7 +56,8 @@ public class Contributors {
         final String mail = committer ? input.substring(0, input.length() - 1) : input;
         final String hash = gravatarHash(mail);
         final Response gravatar = target.path(hash + ".json").request(MediaType.APPLICATION_JSON_TYPE).get();
-        if (gravatar.getStatus() != 200) {
+        if (gravatar.getStatus() != HttpsURLConnection.HTTP_OK) {
+            System.err.println("[ERROR] No gravatar for " + mail);
             return null;
         }
         final Contributor contributor = ofNullable(gravatar.readEntity(Gravatar.class).getEntry())

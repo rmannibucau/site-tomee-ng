@@ -6,7 +6,8 @@
 ----
 agumbrecht@tomitribe.com*
 jeanouii@gmail.com*
-jonathan.gallimore@gmail.com*
 rmannibucau@gmail.com*
 struberg@yahoo.de*
+jgallimore@apache.org*
+tveronezi@apache.org*
 ----
