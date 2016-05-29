@@ -87,3 +87,15 @@ NOTE: this is still a TomEE so all system properties work (for instance to creat
 |--property|-|a list of container properties (values follow the format x=y)
 |===
 
+Note that since 7.0.0 TomEE provides 3 flavors (qualifier) of tomee-embedded as fat jars:
+
+- uber (where we put all request features by users, this is likely the most complete and the biggest)
+- jaxrs: webprofile minus JSF
+- jaxws: webprofile plus JAX-WS
+
+These different uber jars are interesting in mainly 2 cases:
+
+- you do a war shade (it avoids to list a bunch of dependencies but still get a customized version)
+- you run your application using `--path` option
+
+NOTE: if you already do a custom shade/fatjar this is not really impacting since you can depend on `tomee-embedded` and exclude/include what you want.

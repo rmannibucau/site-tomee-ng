@@ -52,6 +52,8 @@ Just need to enable that by setting disabled=false. All of the above settings ex
 
 The group setting can be changed to further group servers that may use the same multicast channel. As shown below the client also has a group setting which can be used to select an appropriate server from the multicast channel.
 
+IMPORTANT: for multicast to work you need to have ejbd activated as a normal service. This can be done setting in `conf/system.properties` the entry: `openejb.service.manager.class = org.apache.openejb.server.SimpleServiceManager`.
+
 ===== Multicast Client
 
 The multicast functionality is not just for servers to find each other in a cluster, it can also be used for EJB clients to discover a server. A special multicast:// URL can be used in the InitialContext properties to signify that multicast should be used to seed the connection process. Such as:
@@ -63,8 +65,9 @@ p.put(Context.INITIAL_CONTEXT_FACTORY,
 "org.apache.openejb.client.RemoteInitialContextFactory");
 p.put(Context.PROVIDER_URL, "multicast://239.255.2.3:6142?group=default");
 InitialContext remoteContext = new InitialContext(p);
-The URL has optional query parameters such as schemes and group and timeout which allow you to zero in on a particular type of service of a particular cluster group as well as set how long you are willing to wait in the discovery process till finally giving up. The first matching service that it sees "flowing" around on the UDP stream is the one it picks and sticks to for that and subsequent requests, ensuring UDP is only used when there are no other servers to talk to.
 ----
+
+The URL has optional query parameters such as schemes and group and timeout which allow you to zero in on a particular type of service of a particular cluster group as well as set how long you are willing to wait in the discovery process till finally giving up. The first matching service that it sees "flowing" around on the UDP stream is the one it picks and sticks to for that and subsequent requests, ensuring UDP is only used when there are no other servers to talk to.
 
 Note that EJB clients do not need to use multicast to find a server. If the client knows the URL of a server in the cluster, it may use it and connect directly to that server, at which point that server will share the full list of its peers.
 

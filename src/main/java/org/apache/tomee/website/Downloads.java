@@ -71,6 +71,12 @@ public class Downloads {
 
                     final int versionComp = o2.version.compareTo(o1.version);
                     if (versionComp != 0) {
+                        if (o2.version.startsWith(o1.version) && o2.version.contains("-M")) { // milestone
+                            return -1;
+                        }
+                        if (o1.version.startsWith(o2.version) && o1.version.contains("-M")) { // milestone
+                            return 1;
+                        }
                         return versionComp;
                     }
 
