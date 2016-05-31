@@ -86,3 +86,15 @@ to use a MySQL database on OpenShift you can do:
 ----
 
 `resources.xml` supports `Resource`, `Service` and `Container`.
+
+==== `resources.xml` mecanism
+
+`resources.xml` resources are still available globally like any `tomee.xml` resource.
+
+The actual resource is bound in an application subtree called with the application name and a resource facade is bound
+in the global naming tree to be able to route the requests depending the application.
+
+Typically if your application is named `myapp` and your resource id is `myresource` then instead of being registered
+as `myresource`, it will get registered as `myapp/myresource`.
+
+If you get any ambiguity in resource name matching try to fully qualified your resource prefixing it with the application name.
