@@ -5,3 +5,4 @@
 :jbake-tomeepdf:
 
 - link:maven-plugins.html[Maven Plugins]
+- link:gradle-plugins.html[Gradle Plugin]
