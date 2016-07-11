@@ -10,7 +10,7 @@
 |===
 |Name	|Value|	Description
 |openejb.embedded.remotable|	bool|	activate or not the remote services when available
-|.bind, <service prefix>.port, <service prefix>.disabled, <service prefix>.threads	| host or IP, port, bool|override the host. Available for ejbd and httpejbd services (used by jaxws and jaxrs), number of thread to maneg requests
+|.bind, <service prefix>.port, <service prefix>.disabled, <service prefix>.threads	| host or IP, port, bool|override the host. Available for ejbd and httpejbd services (used by jaxws and jaxrs), number of thread to manage requests
 |openejb.embedded.initialcontext.close	|LOGOUT or DESTROY|	configure the hook called when closing the initial context. Useful when starting OpenEJB from a new InitialContext([properties]) instantiation. By default it simply logs out the logged user if it exists. DESTROY means clean the container.
 |javax.persistence.provider	|string|	override the JPA provider value
 |javax.persistence.transactionType	|string|	override the transaction type for persistence contexts
@@ -41,9 +41,9 @@
 |openejb.localcopy	|bool|	default true. whether or not copy EJB arguments[/method/interface] for remote invocations.
 |openejb.cxf.jax-rs.providers	|string|the list of the qualified name of the JAX-RS providers separated by comma or space. Note: to specify a provider for a specific service suffix its class qualified name by ".providers", the value follow the same rules. Note 2: default is a shortcut for jaxb and json providers.
 |openejb.wsAddress.format	|string| composition of {ejbJarId}, ejbDeploymentId, ejbType, ejbClass, ejbClass.simpleName, ejbName, portComponentName, wsdlPort, wsdlService	default /{ejbDeploymentId}. The WS name format.
-|org.apache.openejb.server.webservices.saaj.provider	axis2, sun or null	specified the saaj configuration
+|org.apache.openejb.server.webservices.saaj.provider|	axis2, sun or null	|specified the saaj configuration
 |[<uppercase service name>.]<service id>.<name> or [<uppercase service name>.]<service id>	|whatever is supported (generally string, int ...)|	set this value to the corresponding service. example: [EnterpriseBean.]<ejb-name>.activation.<property>, [PERSISTENCEUNIT.]<persistence unit name>.<property>, [RESOURCE.]<name>
-|log4j.category.OpenEJB.options	DEBUG, INFO, ...	active one OpenEJB log level. need log4j in the classpath
+|log4j.category.OpenEJB.options|	DEBUG, INFO, ...	|active one OpenEJB log level. need log4j in the classpath
 |openejb.jmx.active|	bool|	activate (by default) or not the OpenEJB JMX MBeans
 |openejb.nobanner	|bool|	activate or not the OpenEJB banner (activated by default)
 |openejb.check.classloader	|bool|	if true print some information about duplicated classes
