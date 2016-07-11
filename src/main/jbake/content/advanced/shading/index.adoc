@@ -1,8 +1,10 @@
-= TomEE and Fat jars
+= TomEE Shading
 :jbake-date: 2016-03-16
 :jbake-type: page
 :jbake-status: published
 :jbake-tomeepdf:
+
+== Fat Jars
 
 Shading the container and the application has some challenges like merging correctly resources (`META-INF/services/` typically).
 
@@ -53,3 +55,86 @@ IMPORTANT: this shade uses TomEE Embedded but you can do the same with an link:.
 
 TIP: if you have `META-INF/web-fragment.xml` in your application you will need to merge them in a single one in the shade. Note that tomcat provides one
 which can be skipped in this operation since it is there only as a marker for jasper detection.
+
+Then just build the jar:
+
+[source,bash]
+----
+mvn clean package
+----
+
+And you can run it:
+
+[source,bash]
+----
+java -jar myapp-1.0-SNAPSHOT.jar
+----
+
+== Fat Wars
+
+Fat Wars are executable wars. Note they can be fancy for demos but they have the drawback to put the server in web resources
+at packaging time (to ensure the war is actually an executable jar) so adding a filter preventing these files to be read
+can be needed if you don't already use a web technology doing it (a servlet bound to /*).
+
+Here how to do a fat war:
+
+[source,xml]
+----
+<properties>
+  <!-- can be uber (for all), jaxrs, jaxws for lighter ones -->
+  <tomee.flavor>uber</tomee.flavor>
+</properties>
+
+<dependencies>
+  <!-- ...your dependencies as usual... -->
+  <dependency>
+    <groupId>org.apache.tomee</groupId>
+    <artifactId>tomee-embedded</artifactId>
+    <classifier>${tomee.flavor}</classifier>
+    <version>7.0.0</version>
+    <scope>provided</scope>
+  </dependency>
+</dependencies>
+
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-war-plugin</artifactId>
+      <version>2.6</version>
+      <configuration>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <archive>
+          <manifest>
+            <mainClass>org.apache.tomee.embedded.Main</mainClass>
+          </manifest>
+        </archive>
+        <dependentWarExcludes />
+        <overlays>
+          <overlay>
+            <groupId>org.apache.tomee</groupId>
+            <artifactId>tomee-embedded</artifactId>
+            <classifier>${tomee.flavor}</classifier>
+            <type>jar</type>
+            <excludes />
+          </overlay>
+        </overlays>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+----
+
+Then just build the war:
+
+[source,bash]
+----
+mvn clean package
+----
+
+And you can run it:
+
+[source,bash]
+----
+java -jar myapp-1.0-SNAPSHOT.war
+----
