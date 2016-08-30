@@ -18,7 +18,7 @@
   <div class="col-md-12 contributors">
     <ul>
       <% org.apache.tomee.website.Examples.load().each {example -> %>
-      <li><a href="${example.url}">${example.name}</a></li>
+      <li><a href="${example.name}.html">${example.name}</a></li>
       <% } %>
     </ul>
   </div>
