@@ -16,26 +16,31 @@ Before we start, if you take a peek in the project pom.xml and look for the mave
 two completely different driver files for this example.
 
 =  AlternateDataSourceTest.java
-This test utilizes the Arquillian testing framework. See [here](http://tomee.apache.org/arquillian-available-adapters.html) for more details.
+This test utilizes the Arquillian testing framework. See link:http://tomee.apache.org/arquillian-available-adapters.html[here] for more details.
 
 The example uses src/test/resources/arquillian.xml and src/test/conf/tomee.xml to define the DataSources.
 Note the differing driver version paths, yet still using the same provider (org.apache.derby.jdbc.EmbeddedDriver):
 
-    <tomee>
 
-      <Resource id="DatabaseOne" type="DataSource" classpath="${catalina.base}/../../drivers/derby-10.10.1.1.jar">
-        JdbcDriver org.apache.derby.jdbc.EmbeddedDriver
-        JdbcUrl jdbc:derby:databaseOne;create=true
-        UserName SA
-      </Resource>
+[source,xml]
+----
+<tomee>
 
-      <Resource id="DatabaseTwo" type="DataSource" classpath="${catalina.base}/../../drivers/derby-10.9.1.0.jar">
-        JdbcDriver org.apache.derby.jdbc.EmbeddedDriver
-        JdbcUrl jdbc:derby:databaseTwo;create=true
-        UserName SA
-      </Resource>
+  <Resource id="DatabaseOne" type="DataSource" classpath="${catalina.base}/../../drivers/derby-10.10.1.1.jar">
+    JdbcDriver org.apache.derby.jdbc.EmbeddedDriver
+    JdbcUrl jdbc:derby:databaseOne;create=true
+    UserName SA
+  </Resource>
 
-    </tomee>
+  <Resource id="DatabaseTwo" type="DataSource" classpath="${catalina.base}/../../drivers/derby-10.9.1.0.jar">
+    JdbcDriver org.apache.derby.jdbc.EmbeddedDriver
+    JdbcUrl jdbc:derby:databaseTwo;create=true
+    UserName SA
+  </Resource>
+
+</tomee>
+----
+
 	
 =  Developer Information
 When testing within a Maven environment it is also possible to use direct maven coordinates rather than a file link, like so:

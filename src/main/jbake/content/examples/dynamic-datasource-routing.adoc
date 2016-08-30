@@ -154,18 +154,23 @@ you can find in META-INF/org.router/ and called service-jar.xml
 
 It contains the following code:
 
-    <ServiceJar>
-      <ServiceProvider id="DeterminedRouter" <!-- the name you want to use -->
-          service="Resource"
-          type="org.apache.openejb.resource.jdbc.Router"
-          class-name="org.superbiz.dynamicdatasourcerouting.DeterminedRouter"> <!-- implementation class -->
 
-        # the parameters
+[source,xml]
+----
+<ServiceJar>
+  <ServiceProvider id="DeterminedRouter" <!-- the name you want to use -->
+      service="Resource"
+      type="org.apache.openejb.resource.jdbc.Router"
+      class-name="org.superbiz.dynamicdatasourcerouting.DeterminedRouter"> <!-- implementation class -->
 
-        DataSourceNames
-        DefaultDataSourceName
-      </ServiceProvider>
-    </ServiceJar>
+    # the parameters
+
+    DataSourceNames
+    DefaultDataSourceName
+  </ServiceProvider>
+</ServiceJar>
+----
+
 
 
 =  Using the Router
@@ -265,37 +270,62 @@ public class DynamicDataSourceTest {
 
 The testcase above uses properties for configuration.  The identical way to do it via the `conf/openejb.xml` is as follows:
 
-    <!-- Router and datasource -->
-    <Resource id="My Router" type="org.apache.openejb.router.test.DynamicDataSourceTest$DeterminedRouter" provider="org.routertest:DeterminedRouter">
-        DatasourceNames = database1 database2 database3
-        DefaultDataSourceName = database1
-    </Resource>
-    <Resource id="Routed Datasource" type="org.apache.openejb.resource.jdbc.Router" provider="RoutedDataSource">
-        Router = My Router
-    </Resource>
 
-    <!-- real datasources -->
-    <Resource id="database1" type="DataSource">
-        JdbcDriver = org.hsqldb.jdbcDriver
-        JdbcUrl = jdbc:hsqldb:mem:db1
-        UserName = sa
-        Password
-        JtaManaged = true
-    </Resource>
-    <Resource id="database2" type="DataSource">
-        JdbcDriver = org.hsqldb.jdbcDriver
-        JdbcUrl = jdbc:hsqldb:mem:db2
-        UserName = sa
-        Password
-        JtaManaged = true
-    </Resource>
-    <Resource id="database3" type="DataSource">
-        JdbcDriver = org.hsqldb.jdbcDriver
-        JdbcUrl = jdbc:hsqldb:mem:db3
-        UserName = sa
-        Password
-        JtaManaged = true
-    </Resource>
+[source,xml]
+----
+<!-- Router and datasource -->
+<Resource id="My Router" type="org.apache.openejb.router.test.DynamicDataSourceTest$DeterminedRouter" provider="org.routertest:DeterminedRouter">
+    DatasourceNames = database1 database2 database3
+    DefaultDataSourceName = database1
+</Resource>
+----
+
+
+[source,xml]
+----
+<Resource id="Routed Datasource" type="org.apache.openejb.resource.jdbc.Router" provider="RoutedDataSource">
+    Router = My Router
+</Resource>
+----
+
+
+
+[source,xml]
+----
+<!-- real datasources -->
+<Resource id="database1" type="DataSource">
+    JdbcDriver = org.hsqldb.jdbcDriver
+    JdbcUrl = jdbc:hsqldb:mem:db1
+    UserName = sa
+    Password
+    JtaManaged = true
+</Resource>
+----
+
+
+[source,xml]
+----
+<Resource id="database2" type="DataSource">
+    JdbcDriver = org.hsqldb.jdbcDriver
+    JdbcUrl = jdbc:hsqldb:mem:db2
+    UserName = sa
+    Password
+    JtaManaged = true
+</Resource>
+----
+
+
+[source,xml]
+----
+<Resource id="database3" type="DataSource">
+    JdbcDriver = org.hsqldb.jdbcDriver
+    JdbcUrl = jdbc:hsqldb:mem:db3
+    UserName = sa
+    Password
+    JtaManaged = true
+</Resource>
+----
+
 
 
 

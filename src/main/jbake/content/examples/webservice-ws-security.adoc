@@ -97,209 +97,224 @@ public interface CalculatorWs {
 
 ==  ejb-jar.xml
 
-    <ejb-jar xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd"
-             version="3.0" id="simple" metadata-complete="false">
-    
-      <enterprise-beans>
-    
-        <session>
-          <ejb-name>CalculatorImplTimestamp1way</ejb-name>
-          <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
-          <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
-          <session-type>Stateless</session-type>
-          <transaction-type>Container</transaction-type>
-        </session>
-    
-        <session>
-          <ejb-name>CalculatorImplTimestamp2ways</ejb-name>
-          <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
-          <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
-          <session-type>Stateless</session-type>
-          <transaction-type>Container</transaction-type>
-        </session>
-    
-        <session>
-          <ejb-name>CalculatorImplUsernameTokenPlainPassword</ejb-name>
-          <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
-          <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
-          <session-type>Stateless</session-type>
-          <transaction-type>Container</transaction-type>
-        </session>
-    
-        <session>
-          <ejb-name>CalculatorImplUsernameTokenHashedPassword</ejb-name>
-          <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
-          <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
-          <session-type>Stateless</session-type>
-          <transaction-type>Container</transaction-type>
-        </session>
-    
-        <session>
-          <ejb-name>CalculatorImplUsernameTokenPlainPasswordEncrypt</ejb-name>
-          <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
-          <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
-          <session-type>Stateless</session-type>
-          <transaction-type>Container</transaction-type>
-        </session>
-    
-        <session>
-          <ejb-name>CalculatorImplSign</ejb-name>
-          <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
-          <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
-          <session-type>Stateless</session-type>
-          <transaction-type>Container</transaction-type>
-        </session>
-    
-        <session>
-          <ejb-name>CalculatorImplEncrypt2ways</ejb-name>
-          <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
-          <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
-          <session-type>Stateless</session-type>
-          <transaction-type>Container</transaction-type>
-        </session>
-    
-        <session>
-          <ejb-name>CalculatorImplSign2ways</ejb-name>
-          <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
-          <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
-          <session-type>Stateless</session-type>
-          <transaction-type>Container</transaction-type>
-        </session>
-    
-        <session>
-          <ejb-name>CalculatorImplEncryptAndSign2ways</ejb-name>
-          <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
-          <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
-          <session-type>Stateless</session-type>
-          <transaction-type>Container</transaction-type>
-        </session>
-    
-      </enterprise-beans>
-    
-    </ejb-jar>
+
+[source,xml]
+----
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd"
+         version="3.0" id="simple" metadata-complete="false">
+
+  <enterprise-beans>
+
+    <session>
+      <ejb-name>CalculatorImplTimestamp1way</ejb-name>
+      <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
+      <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+
+    <session>
+      <ejb-name>CalculatorImplTimestamp2ways</ejb-name>
+      <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
+      <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+
+    <session>
+      <ejb-name>CalculatorImplUsernameTokenPlainPassword</ejb-name>
+      <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
+      <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+
+    <session>
+      <ejb-name>CalculatorImplUsernameTokenHashedPassword</ejb-name>
+      <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
+      <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+
+    <session>
+      <ejb-name>CalculatorImplUsernameTokenPlainPasswordEncrypt</ejb-name>
+      <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
+      <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+
+    <session>
+      <ejb-name>CalculatorImplSign</ejb-name>
+      <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
+      <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+
+    <session>
+      <ejb-name>CalculatorImplEncrypt2ways</ejb-name>
+      <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
+      <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+
+    <session>
+      <ejb-name>CalculatorImplSign2ways</ejb-name>
+      <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
+      <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+
+    <session>
+      <ejb-name>CalculatorImplEncryptAndSign2ways</ejb-name>
+      <service-endpoint>org.superbiz.calculator.CalculatorWs</service-endpoint>
+      <ejb-class>org.superbiz.calculator.CalculatorImpl</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+
+  </enterprise-beans>
+
+</ejb-jar>
+----
+
     
 
 ==  openejb-jar.xml
 
-    <openejb-jar xmlns="http://www.openejb.org/openejb-jar/1.1">
-    
-      <ejb-deployment ejb-name="CalculatorImpl">
-        <properties>
-          # webservice.security.realm
-          # webservice.security.securityRealm
-          # webservice.security.transportGarantee = NONE
-          webservice.security.authMethod = WS-SECURITY
-          wss4j.in.action = UsernameToken
-          wss4j.in.passwordType = PasswordText
-          wss4j.in.passwordCallbackClass = org.superbiz.calculator.CustomPasswordHandler
-    
-          # automatically added
-          wss4j.in.validator.{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}UsernameToken = org.apache.openejb.server.cxf.OpenEJBLoginValidator
-        </properties>
-      </ejb-deployment>
-      <ejb-deployment ejb-name="CalculatorImplTimestamp1way">
-        <properties>
-          webservice.security.authMethod = WS-SECURITY
-          wss4j.in.action = Timestamp
-        </properties>
-      </ejb-deployment>
-      <ejb-deployment ejb-name="CalculatorImplTimestamp2ways">
-        <properties>
-          webservice.security.authMethod = WS-SECURITY
-          wss4j.in.action = Timestamp
-          wss4j.out.action = Timestamp
-        </properties>
-      </ejb-deployment>
-      <ejb-deployment ejb-name="CalculatorImplUsernameTokenPlainPassword">
-        <properties>
-          webservice.security.authMethod = WS-SECURITY
-          wss4j.in.action = UsernameToken
-          wss4j.in.passwordType = PasswordText
-          wss4j.in.passwordCallbackClass=org.superbiz.calculator.CustomPasswordHandler
-        </properties>
-      </ejb-deployment>
-      <ejb-deployment ejb-name="CalculatorImplUsernameTokenHashedPassword">
-        <properties>
-          webservice.security.authMethod = WS-SECURITY
-          wss4j.in.action = UsernameToken
-          wss4j.in.passwordType = PasswordDigest
-          wss4j.in.passwordCallbackClass=org.superbiz.calculator.CustomPasswordHandler
-        </properties>
-      </ejb-deployment>
-      <ejb-deployment ejb-name="CalculatorImplUsernameTokenPlainPasswordEncrypt">
-        <properties>
-          webservice.security.authMethod = WS-SECURITY
-          wss4j.in.action = UsernameToken Encrypt
-          wss4j.in.passwordType = PasswordText
-          wss4j.in.passwordCallbackClass=org.superbiz.calculator.CustomPasswordHandler
-          wss4j.in.decryptionPropFile = META-INF/CalculatorImplUsernameTokenPlainPasswordEncrypt-server.properties
-        </properties>
-      </ejb-deployment>
-      <ejb-deployment ejb-name="CalculatorImplSign">
-        <properties>
-          webservice.security.authMethod = WS-SECURITY
-          wss4j.in.action = Signature
-          wss4j.in.passwordCallbackClass=org.superbiz.calculator.CustomPasswordHandler
-          wss4j.in.signaturePropFile = META-INF/CalculatorImplSign-server.properties
-        </properties>
-      </ejb-deployment>
-    
-    </openejb-jar>
+
+[source,xml]
+----
+<openejb-jar xmlns="http://www.openejb.org/openejb-jar/1.1">
+
+  <ejb-deployment ejb-name="CalculatorImpl">
+    <properties>
+      # webservice.security.realm
+      # webservice.security.securityRealm
+      # webservice.security.transportGarantee = NONE
+      webservice.security.authMethod = WS-SECURITY
+      wss4j.in.action = UsernameToken
+      wss4j.in.passwordType = PasswordText
+      wss4j.in.passwordCallbackClass = org.superbiz.calculator.CustomPasswordHandler
+
+      # automatically added
+      wss4j.in.validator.{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}UsernameToken = org.apache.openejb.server.cxf.OpenEJBLoginValidator
+    </properties>
+  </ejb-deployment>
+  <ejb-deployment ejb-name="CalculatorImplTimestamp1way">
+    <properties>
+      webservice.security.authMethod = WS-SECURITY
+      wss4j.in.action = Timestamp
+    </properties>
+  </ejb-deployment>
+  <ejb-deployment ejb-name="CalculatorImplTimestamp2ways">
+    <properties>
+      webservice.security.authMethod = WS-SECURITY
+      wss4j.in.action = Timestamp
+      wss4j.out.action = Timestamp
+    </properties>
+  </ejb-deployment>
+  <ejb-deployment ejb-name="CalculatorImplUsernameTokenPlainPassword">
+    <properties>
+      webservice.security.authMethod = WS-SECURITY
+      wss4j.in.action = UsernameToken
+      wss4j.in.passwordType = PasswordText
+      wss4j.in.passwordCallbackClass=org.superbiz.calculator.CustomPasswordHandler
+    </properties>
+  </ejb-deployment>
+  <ejb-deployment ejb-name="CalculatorImplUsernameTokenHashedPassword">
+    <properties>
+      webservice.security.authMethod = WS-SECURITY
+      wss4j.in.action = UsernameToken
+      wss4j.in.passwordType = PasswordDigest
+      wss4j.in.passwordCallbackClass=org.superbiz.calculator.CustomPasswordHandler
+    </properties>
+  </ejb-deployment>
+  <ejb-deployment ejb-name="CalculatorImplUsernameTokenPlainPasswordEncrypt">
+    <properties>
+      webservice.security.authMethod = WS-SECURITY
+      wss4j.in.action = UsernameToken Encrypt
+      wss4j.in.passwordType = PasswordText
+      wss4j.in.passwordCallbackClass=org.superbiz.calculator.CustomPasswordHandler
+      wss4j.in.decryptionPropFile = META-INF/CalculatorImplUsernameTokenPlainPasswordEncrypt-server.properties
+    </properties>
+  </ejb-deployment>
+  <ejb-deployment ejb-name="CalculatorImplSign">
+    <properties>
+      webservice.security.authMethod = WS-SECURITY
+      wss4j.in.action = Signature
+      wss4j.in.passwordCallbackClass=org.superbiz.calculator.CustomPasswordHandler
+      wss4j.in.signaturePropFile = META-INF/CalculatorImplSign-server.properties
+    </properties>
+  </ejb-deployment>
+
+</openejb-jar>
+----
+
     
 
 ==  webservices.xml
 
-    <webservices xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
-    http://www.ibm.com/webservices/xsd/j2ee_web_services_1_1.xsd"
-                 xmlns:ger="http://ciaows.org/wsdl" version="1.1">
-    
-      <webservice-description>
-        <webservice-description-name>CalculatorWsService</webservice-description-name>
-        <port-component>
-          <port-component-name>CalculatorImplTimestamp1way</port-component-name>
-          <wsdl-port>CalculatorImplTimestamp1way</wsdl-port>
-          <service-endpoint-interface>org.superbiz.calculator.CalculatorWs</service-endpoint-interface>
-          <service-impl-bean>
-            <ejb-link>CalculatorImplTimestamp1way</ejb-link>
-          </service-impl-bean>
-        </port-component>
-        <port-component>
-          <port-component-name>CalculatorImplTimestamp2ways</port-component-name>
-          <wsdl-port>CalculatorImplTimestamp2ways</wsdl-port>
-          <service-endpoint-interface>org.superbiz.calculator.CalculatorWs</service-endpoint-interface>
-          <service-impl-bean>
-            <ejb-link>CalculatorImplTimestamp2ways</ejb-link>
-          </service-impl-bean>
-        </port-component>
-        <port-component>
-          <port-component-name>CalculatorImplUsernameTokenPlainPassword</port-component-name>
-          <wsdl-port>CalculatorImplUsernameTokenPlainPassword</wsdl-port>
-          <service-endpoint-interface>org.superbiz.calculator.CalculatorWs</service-endpoint-interface>
-          <service-impl-bean>
-            <ejb-link>CalculatorImplUsernameTokenPlainPassword</ejb-link>
-          </service-impl-bean>
-        </port-component>
-        <port-component>
-          <port-component-name>CalculatorImplUsernameTokenHashedPassword</port-component-name>
-          <wsdl-port>CalculatorImplUsernameTokenHashedPassword</wsdl-port>
-          <service-endpoint-interface>org.superbiz.calculator.CalculatorWs</service-endpoint-interface>
-          <service-impl-bean>
-            <ejb-link>CalculatorImplUsernameTokenHashedPassword</ejb-link>
-          </service-impl-bean>
-        </port-component>
-        <port-component>
-          <port-component-name>CalculatorImplUsernameTokenPlainPasswordEncrypt</port-component-name>
-          <wsdl-port>CalculatorImplUsernameTokenPlainPasswordEncrypt</wsdl-port>
-          <service-endpoint-interface>org.superbiz.calculator.CalculatorWs</service-endpoint-interface>
-          <service-impl-bean>
-            <ejb-link>CalculatorImplUsernameTokenPlainPasswordEncrypt</ejb-link>
-          </service-impl-bean>
-        </port-component>
-      </webservice-description>
-    
-    </webservices>
+
+[source,xml]
+----
+<webservices xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+http://www.ibm.com/webservices/xsd/j2ee_web_services_1_1.xsd"
+             xmlns:ger="http://ciaows.org/wsdl" version="1.1">
+
+  <webservice-description>
+    <webservice-description-name>CalculatorWsService</webservice-description-name>
+    <port-component>
+      <port-component-name>CalculatorImplTimestamp1way</port-component-name>
+      <wsdl-port>CalculatorImplTimestamp1way</wsdl-port>
+      <service-endpoint-interface>org.superbiz.calculator.CalculatorWs</service-endpoint-interface>
+      <service-impl-bean>
+        <ejb-link>CalculatorImplTimestamp1way</ejb-link>
+      </service-impl-bean>
+    </port-component>
+    <port-component>
+      <port-component-name>CalculatorImplTimestamp2ways</port-component-name>
+      <wsdl-port>CalculatorImplTimestamp2ways</wsdl-port>
+      <service-endpoint-interface>org.superbiz.calculator.CalculatorWs</service-endpoint-interface>
+      <service-impl-bean>
+        <ejb-link>CalculatorImplTimestamp2ways</ejb-link>
+      </service-impl-bean>
+    </port-component>
+    <port-component>
+      <port-component-name>CalculatorImplUsernameTokenPlainPassword</port-component-name>
+      <wsdl-port>CalculatorImplUsernameTokenPlainPassword</wsdl-port>
+      <service-endpoint-interface>org.superbiz.calculator.CalculatorWs</service-endpoint-interface>
+      <service-impl-bean>
+        <ejb-link>CalculatorImplUsernameTokenPlainPassword</ejb-link>
+      </service-impl-bean>
+    </port-component>
+    <port-component>
+      <port-component-name>CalculatorImplUsernameTokenHashedPassword</port-component-name>
+      <wsdl-port>CalculatorImplUsernameTokenHashedPassword</wsdl-port>
+      <service-endpoint-interface>org.superbiz.calculator.CalculatorWs</service-endpoint-interface>
+      <service-impl-bean>
+        <ejb-link>CalculatorImplUsernameTokenHashedPassword</ejb-link>
+      </service-impl-bean>
+    </port-component>
+    <port-component>
+      <port-component-name>CalculatorImplUsernameTokenPlainPasswordEncrypt</port-component-name>
+      <wsdl-port>CalculatorImplUsernameTokenPlainPasswordEncrypt</wsdl-port>
+      <service-endpoint-interface>org.superbiz.calculator.CalculatorWs</service-endpoint-interface>
+      <service-impl-bean>
+        <ejb-link>CalculatorImplUsernameTokenPlainPasswordEncrypt</ejb-link>
+      </service-impl-bean>
+    </port-component>
+  </webservice-description>
+
+</webservices>
+----
+
     
 
 ==  CalculatorTest

@@ -48,24 +48,28 @@ This example shows how it improves the default integration of Bean-Validation (J
 <h3>Apache DeltaSpike</h3>
 
 <ul>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/view/config/Pages.java" target="_blank">Type-safe view-config</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/view/InfoPage.java" target="_blank">Type-safe (custom) view-meta-data</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/view/MenuBean.java" target="_blank">Type-safe navigation</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/CustomProjectStage.java" target="_blank">Type-safe custom project-stage</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/view/UserHolder.java" target="_blank">@WindowScoped</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/view/MenuBean.java" target="_blank">Controlling DeltaSpike grouped-conversations with GroupedConversationManager</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/view/FeedbackPage.java" target="_blank">@GroupedConversationScoped</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/view/FeedbackPage.java" target="_blank">Manual conversation handling</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/view/security/LoginAccessDecisionVoter.java" target="_blank">Secured pages (AccessDecisionVoter)</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/repository/Repository.java" target="_blank">@Transactional</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/view/RegistrationPage.java" target="_blank">I18n (type-safe messages)</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/domain/validation/UniqueUserNameValidator.java" target="_blank">Dependency-Injection for JSR303 (BV) constraint-validators</a></li>
-    <li><a href="./src/main/java/org/superbiz/deltaspike/DebugPhaseListener.java" target="_blank">Dependency-Injection for JSF phase-listeners</a></li>
+
+[source,xml]
+----
+<li><a href="./src/main/java/org/superbiz/deltaspike/view/config/Pages.java" target="_blank">Type-safe view-config</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/view/InfoPage.java" target="_blank">Type-safe (custom) view-meta-data</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/view/MenuBean.java" target="_blank">Type-safe navigation</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/CustomProjectStage.java" target="_blank">Type-safe custom project-stage</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/view/UserHolder.java" target="_blank">@WindowScoped</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/view/MenuBean.java" target="_blank">Controlling DeltaSpike grouped-conversations with GroupedConversationManager</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/view/FeedbackPage.java" target="_blank">@GroupedConversationScoped</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/view/FeedbackPage.java" target="_blank">Manual conversation handling</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/view/security/LoginAccessDecisionVoter.java" target="_blank">Secured pages (AccessDecisionVoter)</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/repository/Repository.java" target="_blank">@Transactional</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/view/RegistrationPage.java" target="_blank">I18n (type-safe messages)</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/domain/validation/UniqueUserNameValidator.java" target="_blank">Dependency-Injection for JSR303 (BV) constraint-validators</a></li>
+<li><a href="./src/main/java/org/superbiz/deltaspike/DebugPhaseListener.java" target="_blank">Dependency-Injection for JSF phase-listeners</a></li>
 </ul>
 
 <h3>Apache MyFaces ExtVal</h3>
 
 <ul>
-    <li><a href="./src/main/java/org/superbiz/myfaces/view/RegistrationPage.java" target="_blank">Cross-Field validation (@Equals)</a></li>
-    <li><a href="./src/main/java/org/superbiz/myfaces/view/RegistrationPage.java" target="_blank">Type-safe group-validation (@BeanValidation) for JSF action-methods</a></li>
+<li><a href="./src/main/java/org/superbiz/myfaces/view/RegistrationPage.java" target="_blank">Cross-Field validation (@Equals)</a></li>
+<li><a href="./src/main/java/org/superbiz/myfaces/view/RegistrationPage.java" target="_blank">Type-safe group-validation (@BeanValidation) for JSF action-methods</a></li>
 </ul>
+

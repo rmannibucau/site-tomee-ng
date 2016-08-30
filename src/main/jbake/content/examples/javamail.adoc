@@ -15,7 +15,7 @@ This is just a simple example to demonstrate a very basic usage of the API. It s
 
 Here we see a very simple RESTful endpoint that can be called with a message to send by Email. It would not be hard to modify the application to provide
 more useful configuration options. As is, this will not send anything, but if you change the parameters to match your mail server then you'll see the message being sent.
-You can find much more detailed information on the [Javamail API here](https://java.net/projects/javamail/pages/Home#Samples)
+You can find much more detailed information on the link:https://java.net/projects/javamail/pages/Home#Samples[Javamail API here]
 
 
 [source,java]

@@ -99,14 +99,19 @@ Before we say "all done" there's one last thing we are left with! To enable the 
 
 Lets quickly put up a `beans.xml` file like the following in `src/main/resources/META-INF/beans.xml`:
 
-    <beans>
-      <interceptors>
-        <class>org.superbiz.cdi.bookshow.interceptors.BookForAShowLoggingInterceptor
-        </class>
-        <class>org.superbiz.cdi.bookshow.interceptors.TimeBasedRestrictingInterceptor
-        </class>
-      </interceptors>
-    </beans>
+
+[source,xml]
+----
+<beans>
+  <interceptors>
+    <class>org.superbiz.cdi.bookshow.interceptors.BookForAShowLoggingInterceptor
+    </class>
+    <class>org.superbiz.cdi.bookshow.interceptors.TimeBasedRestrictingInterceptor
+    </class>
+  </interceptors>
+</beans>
+----
+
 
 
 By default, a bean archive has no enabled interceptors bound via interceptor

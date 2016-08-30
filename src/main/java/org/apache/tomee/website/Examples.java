@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
@@ -149,6 +151,8 @@ public class Examples {
 
     // quick cleanup of markdown syntax to adoc one used there
     private static String mdToAdoc(final String s) {
+        final Pattern link = Pattern.compile("(.*)\\[([^\\]]*)\\]\\(([^\\)]*)\\)(.*)");
+
         try (final StringWriter writer = new StringWriter();
              final BufferedReader reader = new BufferedReader(new StringReader(s))) {
             String line;
@@ -175,6 +179,45 @@ public class Examples {
                             break;
                         }
                     }
+                } else if (line.startsWith("    <")) { // xml code
+                    writer.append("\n[source,xml]\n----\n");
+                    if (line.startsWith("    <?")) { // prolog
+                        writer.append(line.replaceFirst("    ", "")).append('\n');
+                        line = reader.readLine();
+                    }
+                    while (line != null && line.trim().isEmpty()) {
+                        line = reader.readLine();
+                    }
+                    if (line.trim().startsWith("<!--")) {
+                        if (line.contains("-->")) {
+                            writer.append(line.replaceFirst("    ", "")).append('\n');
+                        } else {
+                            do {
+                                writer.append(line.replaceFirst("    ", "")).append('\n');
+                            } while ((line = reader.readLine()) != null && !line.trim().equals("-->"));
+                            writer.append(line.replaceFirst("    ", "")).append('\n');
+                        }
+                        line = reader.readLine();
+                        while (line != null && line.trim().isEmpty()) {
+                            line = reader.readLine();
+                        }
+                    }
+
+                    if (line.trim().endsWith("/>")) {
+                        writer.append(line.replaceFirst("    ", "")).append('\n');
+                        writer.append("----\n");
+                    } else {
+                        final int space = line.indexOf(' ', 5);
+                        final String end = "</" + line.substring(5, space < 0 ? line.indexOf('>') : space) + ">";
+                        writer.append(line.replaceFirst("    ", "")).append('\n');
+                        while ((line = reader.readLine()) != null) {
+                            writer.append(line.replaceFirst("    ", "")).append('\n');
+                            if (end.equals(line.trim())) {
+                                writer.append("----\n");
+                                break;
+                            }
+                        }
+                    }
                 } else if (line.startsWith("    -------------------------------------------------------")) { // run output
                     writer.append("\n[source]\n----\n");
                     writer.append(line.replaceFirst("    ", "")).append('\n');
@@ -188,7 +231,16 @@ public class Examples {
                 } else if (line.startsWith(">")) {
                     writer.append("\nNOTE: ").append(line.substring(1)).append("\n");
                 } else {
-                    writer.append(line);
+                    final Matcher matcher = link.matcher(line);
+                    if (matcher.matches()) {
+                        String l = matcher.group(3);
+                        if (l.startsWith("../") && l.endsWith("README.html")) { // hack for old relative links
+                            l = l.substring("../".length(), l.length() - "/README.html".length()) + ".html";
+                        }
+                        writer.append(matcher.group(1)).append("link:").append(l).append('[').append(matcher.group(2)).append(']').append(matcher.group(4));
+                    } else {
+                        writer.append(line);
+                    }
                 }
                 writer.append('\n');
             }

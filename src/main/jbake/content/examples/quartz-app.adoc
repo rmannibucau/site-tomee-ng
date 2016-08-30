@@ -41,35 +41,40 @@ The connector in question has both inbound and outbound Resource Adapters.  The 
 
 the outbound Resource Adapter, `QuartzResourceAdapter`, can be injected into any component via `@Resource` and used to originate and send messages or events.
 
-    <connector xmlns="http://java.sun.com/xml/ns/j2ee"
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
-               http://java.sun.com/xml/ns/j2ee/connector_1_5.xsd"
-               version="1.5">
 
-      <description>Quartz ResourceAdapter</description>
-      <display-name>Quartz ResourceAdapter</display-name>
+[source,xml]
+----
+<connector xmlns="http://java.sun.com/xml/ns/j2ee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+           http://java.sun.com/xml/ns/j2ee/connector_1_5.xsd"
+           version="1.5">
 
-      <vendor-name>OpenEJB</vendor-name>
-      <eis-type>Quartz Adapter</eis-type>
-      <resourceadapter-version>1.0</resourceadapter-version>
+  <description>Quartz ResourceAdapter</description>
+  <display-name>Quartz ResourceAdapter</display-name>
 
-      <resourceadapter id="QuartzResourceAdapter">
-        <resourceadapter-class>org.apache.openejb.resource.quartz.QuartzResourceAdapter</resourceadapter-class>
+  <vendor-name>OpenEJB</vendor-name>
+  <eis-type>Quartz Adapter</eis-type>
+  <resourceadapter-version>1.0</resourceadapter-version>
 
-        <inbound-resourceadapter>
-          <messageadapter>
-            <messagelistener>
-              <messagelistener-type>org.quartz.Job</messagelistener-type>
-              <activationspec>
-                <activationspec-class>org.apache.openejb.resource.quartz.JobSpec</activationspec-class>
-              </activationspec>
-            </messagelistener>
-          </messageadapter>
-        </inbound-resourceadapter>
+  <resourceadapter id="QuartzResourceAdapter">
+    <resourceadapter-class>org.apache.openejb.resource.quartz.QuartzResourceAdapter</resourceadapter-class>
 
-      </resourceadapter>
-    </connector>
+    <inbound-resourceadapter>
+      <messageadapter>
+        <messagelistener>
+          <messagelistener-type>org.quartz.Job</messagelistener-type>
+          <activationspec>
+            <activationspec-class>org.apache.openejb.resource.quartz.JobSpec</activationspec-class>
+          </activationspec>
+        </messagelistener>
+      </messageadapter>
+    </inbound-resourceadapter>
+
+  </resourceadapter>
+</connector>
+----
+
 
 
 =  Using the Outbound Resource Adapter

@@ -82,18 +82,23 @@ public class Movie {
 The above `Movie` entity can be created, removed, updated or deleted via an `EntityManager` object.  The `EntityManager` itself is
 configured via a `META-INF/persistence.xml` file that is placed in the same jar as the `Movie` entity.
 
-    <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
 
-      <persistence-unit name="movie-unit">
-        <jta-data-source>movieDatabase</jta-data-source>
-        <non-jta-data-source>movieDatabaseUnmanaged</non-jta-data-source>
-        <class>org.superbiz.injection.jpa.Movie</class>
+[source,xml]
+----
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
 
-        <properties>
-          <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
-        </properties>
-      </persistence-unit>
-    </persistence>
+  <persistence-unit name="movie-unit">
+    <jta-data-source>movieDatabase</jta-data-source>
+    <non-jta-data-source>movieDatabaseUnmanaged</non-jta-data-source>
+    <class>org.superbiz.injection.jpa.Movie</class>
+
+    <properties>
+      <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+    </properties>
+  </persistence-unit>
+</persistence>
+----
+
 
 Notice that the `Movie` entity is listed via a `<class>` element.  This is not required, but can help when testing or when the
 `Movie` class is located in a different jar than the jar containing the `persistence.xml` file.
@@ -143,7 +148,7 @@ This particular `EntityManager` is injected as an `EXTENDED` persistence context
 is created when the `@Stateful` bean is created and destroyed when the `@Stateful` bean is destroyed.  Simply put, the
 data in the `EntityManager` is cached for the lifetime of the `@Stateful` bean.
 
-The use of `EXTENDED` persistence contexts is **only** available to `@Stateful` beans.  See the [JPA Concepts](../../jpa-concepts.html) page for an high level explanation of what a "persistence context" really is and how it is significant to JPA.
+The use of `EXTENDED` persistence contexts is **only** available to `@Stateful` beans.  See the link:../../jpa-concepts.html[JPA Concepts] page for an high level explanation of what a "persistence context" really is and how it is significant to JPA.
 
 ==  MoviesTest
 

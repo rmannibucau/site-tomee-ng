@@ -903,251 +903,286 @@ public class WebserviceServlet extends HttpServlet {
 
 ==  persistence.xml
 
-    <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
-      <persistence-unit transaction-type="RESOURCE_LOCAL" name="jpa-example">
-        <jta-data-source>java:openejb/Connector/Default JDBC Database</jta-data-source>
-        <non-jta-data-source>java:openejb/Connector/Default Unmanaged JDBC Database</non-jta-data-source>
-        <class>org.superbiz.servlet.JpaBean</class>
-    
-        <properties>
-          <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
-        </properties>
-      </persistence-unit>
-    </persistence>
+
+[source,xml]
+----
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+  <persistence-unit transaction-type="RESOURCE_LOCAL" name="jpa-example">
+    <jta-data-source>java:openejb/Connector/Default JDBC Database</jta-data-source>
+    <non-jta-data-source>java:openejb/Connector/Default Unmanaged JDBC Database</non-jta-data-source>
+    <class>org.superbiz.servlet.JpaBean</class>
+
+    <properties>
+      <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+    </properties>
+  </persistence-unit>
+</persistence>
+----
+
 
 ==  client-handlers.xml
 
-    <jws:handler-chains xmlns:jws="http://java.sun.com/xml/ns/javaee">
-      <jws:handler-chain>
-        <jws:handler>
-          <jws:handler-name>ClientHandler</jws:handler-name>
-          <jws:handler-class>org.superbiz.servlet.ClientHandler</jws:handler-class>
-        </jws:handler>
-      </jws:handler-chain>
-    </jws:handler-chains>
+
+[source,xml]
+----
+<jws:handler-chains xmlns:jws="http://java.sun.com/xml/ns/javaee">
+  <jws:handler-chain>
+    <jws:handler>
+      <jws:handler-name>ClientHandler</jws:handler-name>
+      <jws:handler-class>org.superbiz.servlet.ClientHandler</jws:handler-class>
+    </jws:handler>
+  </jws:handler-chain>
+</jws:handler-chains>
+----
+
     
 
 ==  server-handlers.xml
 
-    <jws:handler-chains xmlns:jws="http://java.sun.com/xml/ns/javaee">
-      <jws:handler-chain>
-        <jws:handler>
-          <jws:handler-name>ServerHandler</jws:handler-name>
-          <jws:handler-class>org.superbiz.servlet.ServerHandler</jws:handler-class>
-        </jws:handler>
-      </jws:handler-chain>
-    </jws:handler-chains>
+
+[source,xml]
+----
+<jws:handler-chains xmlns:jws="http://java.sun.com/xml/ns/javaee">
+  <jws:handler-chain>
+    <jws:handler>
+      <jws:handler-name>ServerHandler</jws:handler-name>
+      <jws:handler-class>org.superbiz.servlet.ServerHandler</jws:handler-class>
+    </jws:handler>
+  </jws:handler-chain>
+</jws:handler-chains>
+----
+
     
 
 ==  context.xml
 
-    <Context>
-      <!-- This only works if the context is installed under the correct name -->
-      <Realm className="org.apache.catalina.realm.MemoryRealm"
-             pathname="webapps/ejb-examples-1.0-SNAPSHOT/WEB-INF/tomcat-users.xml"/>
-    
-      <Environment
-          name="context.xml/environment"
-          value="ContextString"
-          type="java.lang.String"/>
-      <Resource
-          name="context.xml/resource"
-          auth="Container"
-          type="org.superbiz.servlet.ResourceBean"
-          factory="org.apache.naming.factory.BeanFactory"
-          value="ContextResource"/>
-      <ResourceLink
-          name="context.xml/resource-link"
-          global="server.xml/environment"
-          type="java.lang.String"/>
-    
-      <!-- web.xml resources -->
-      <Resource
-          name="web.xml/resource-env-ref"
-          auth="Container"
-          type="org.superbiz.servlet.ResourceBean"
-          factory="org.apache.naming.factory.BeanFactory"
-          value="ContextResourceEnvRef"/>
-      <Resource
-          name="web.xml/resource-ref"
-          auth="Container"
-          type="org.superbiz.servlet.ResourceBean"
-          factory="org.apache.naming.factory.BeanFactory"
-          value="ContextResourceRef"/>
-      <ResourceLink
-          name="web.xml/resource-link"
-          global="server.xml/environment"
-          type="java.lang.String"/>
-    </Context>
+
+[source,xml]
+----
+<Context>
+  <!-- This only works if the context is installed under the correct name -->
+  <Realm className="org.apache.catalina.realm.MemoryRealm"
+         pathname="webapps/ejb-examples-1.0-SNAPSHOT/WEB-INF/tomcat-users.xml"/>
+
+  <Environment
+      name="context.xml/environment"
+      value="ContextString"
+      type="java.lang.String"/>
+  <Resource
+      name="context.xml/resource"
+      auth="Container"
+      type="org.superbiz.servlet.ResourceBean"
+      factory="org.apache.naming.factory.BeanFactory"
+      value="ContextResource"/>
+  <ResourceLink
+      name="context.xml/resource-link"
+      global="server.xml/environment"
+      type="java.lang.String"/>
+
+  <!-- web.xml resources -->
+  <Resource
+      name="web.xml/resource-env-ref"
+      auth="Container"
+      type="org.superbiz.servlet.ResourceBean"
+      factory="org.apache.naming.factory.BeanFactory"
+      value="ContextResourceEnvRef"/>
+  <Resource
+      name="web.xml/resource-ref"
+      auth="Container"
+      type="org.superbiz.servlet.ResourceBean"
+      factory="org.apache.naming.factory.BeanFactory"
+      value="ContextResourceRef"/>
+  <ResourceLink
+      name="web.xml/resource-link"
+      global="server.xml/environment"
+      type="java.lang.String"/>
+</Context>
+----
+
     
 
 ==  jetty-web.xml
 
-    <Configure class="org.eclipse.jetty.webapp.WebAppContext">
-      <Get name="securityHandler">
-        <Set name="loginService">
-          <New class="org.eclipse.jetty.security.HashLoginService">
-            <Set name="name">Test Realm</Set>
-            <Set name="config"><SystemProperty name="jetty.home" default="."/>/etc/realm.properties
-            </Set>
-          </New>
+
+[source,xml]
+----
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+  <Get name="securityHandler">
+    <Set name="loginService">
+      <New class="org.eclipse.jetty.security.HashLoginService">
+        <Set name="name">Test Realm</Set>
+        <Set name="config"><SystemProperty name="jetty.home" default="."/>/etc/realm.properties
         </Set>
-      </Get>
-    </Configure>
+      </New>
+    </Set>
+  </Get>
+</Configure>
+----
+
 
 ==  tomcat-users.xml
 
-    <tomcat-users>
-      <user name="manager" password="manager" roles="manager,user"/>
-      <user name="user" password="user" roles="user"/>
-    </tomcat-users>
+
+[source,xml]
+----
+<tomcat-users>
+  <user name="manager" password="manager" roles="manager,user"/>
+  <user name="user" password="user" roles="user"/>
+</tomcat-users>
+----
+
     
 
 ==  web.xml
 
-    <web-app xmlns="http://java.sun.com/xml/ns/javaee"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-             metadata-complete="false"
-             version="2.5">
-    
-      <display-name>OpenEJB Servlet Examples</display-name>
-    
-      <servlet>
-        <servlet-name>AnnotatedServlet</servlet-name>
-        <servlet-class>org.superbiz.servlet.AnnotatedServlet</servlet-class>
-      </servlet>
-    
-      <servlet-mapping>
-        <servlet-name>AnnotatedServlet</servlet-name>
-        <url-pattern>/annotated/*</url-pattern>
-      </servlet-mapping>
-    
-      <servlet>
-        <servlet-name>JpaServlet</servlet-name>
-        <servlet-class>org.superbiz.servlet.JpaServlet</servlet-class>
-      </servlet>
-    
-      <servlet-mapping>
-        <servlet-name>JpaServlet</servlet-name>
-        <url-pattern>/jpa/*</url-pattern>
-      </servlet-mapping>
-    
-      <servlet>
-        <servlet-name>JndiServlet</servlet-name>
-        <servlet-class>org.superbiz.servlet.JndiServlet</servlet-class>
-      </servlet>
-    
-      <servlet-mapping>
-        <servlet-name>JndiServlet</servlet-name>
-        <url-pattern>/jndi/*</url-pattern>
-      </servlet-mapping>
-    
-      <servlet>
-        <servlet-name>RunAsServlet</servlet-name>
-        <servlet-class>org.superbiz.servlet.RunAsServlet</servlet-class>
-        <run-as>
-          <role-name>fake</role-name>
-        </run-as>
-      </servlet>
-    
-      <servlet-mapping>
-        <servlet-name>RunAsServlet</servlet-name>
-        <url-pattern>/runas/*</url-pattern>
-      </servlet-mapping>
-    
-      <servlet>
-        <servlet-name>SecureServlet</servlet-name>
-        <servlet-class>org.superbiz.servlet.SecureServlet</servlet-class>
-      </servlet>
-    
-      <servlet-mapping>
-        <servlet-name>SecureServlet</servlet-name>
-        <url-pattern>/secure/*</url-pattern>
-      </servlet-mapping>
-    
-      <security-constraint>
-        <web-resource-collection>
-          <web-resource-name>Secure Area</web-resource-name>
-          <url-pattern>/secure/*</url-pattern>
-          <url-pattern>/runas/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-          <role-name>user</role-name>
-        </auth-constraint>
-      </security-constraint>
-    
-      <servlet>
-        <servlet-name>WebserviceServlet</servlet-name>
-        <servlet-class>org.superbiz.servlet.WebserviceServlet</servlet-class>
-      </servlet>
-    
-      <servlet-mapping>
-        <servlet-name>WebserviceServlet</servlet-name>
-        <url-pattern>/webservice/*</url-pattern>
-      </servlet-mapping>
-    
-    
-      <servlet>
-        <servlet-name>HelloPojoService</servlet-name>
-        <servlet-class>org.superbiz.servlet.HelloPojoService</servlet-class>
-      </servlet>
-    
-      <servlet-mapping>
-        <servlet-name>HelloPojoService</servlet-name>
-        <url-pattern>/hello</url-pattern>
-      </servlet-mapping>
-    
-      <login-config>
-        <auth-method>BASIC</auth-method>
-      </login-config>
-    
-      <security-role>
-        <role-name>manager</role-name>
-      </security-role>
-    
-      <security-role>
-        <role-name>user</role-name>
-      </security-role>
-    
-      <env-entry>
-        <env-entry-name>web.xml/env-entry</env-entry-name>
-        <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>WebValue</env-entry-value>
-      </env-entry>
-    
-      <resource-ref>
-        <res-ref-name>web.xml/Data Source</res-ref-name>
-        <res-type>javax.sql.DataSource</res-type>
-        <res-auth>Container</res-auth>
-      </resource-ref>
-    
-      <resource-env-ref>
-        <resource-env-ref-name>web.xml/Queue</resource-env-ref-name>
-        <resource-env-ref-type>javax.jms.Queue</resource-env-ref-type>
-      </resource-env-ref>
-    
-      <ejb-ref>
-        <ejb-ref-name>web.xml/EjbRemote</ejb-ref-name>
-        <ejb-ref-type>Session</ejb-ref-type>
-        <remote>org.superbiz.servlet.AnnotatedEJBRemote</remote>
-      </ejb-ref>
-    
-      <ejb-local-ref>
-        <ejb-ref-name>web.xml/EjLocal</ejb-ref-name>
-        <ejb-ref-type>Session</ejb-ref-type>
-        <local>org.superbiz.servlet.AnnotatedEJBLocal</local>
-      </ejb-local-ref>
-    
-      <persistence-unit-ref>
-        <persistence-unit-ref-name>web.xml/PersistenceUnit</persistence-unit-ref-name>
-        <persistence-unit-name>jpa-example</persistence-unit-name>
-      </persistence-unit-ref>
-    
-      <persistence-context-ref>
-        <persistence-context-ref-name>web.xml/PersistenceContext</persistence-context-ref-name>
-        <persistence-unit-name>jpa-example</persistence-unit-name>
-        <persistence-context-type>Transactional</persistence-context-type>
-      </persistence-context-ref>
-    </web-app>
+
+[source,xml]
+----
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         metadata-complete="false"
+         version="2.5">
+
+  <display-name>OpenEJB Servlet Examples</display-name>
+
+  <servlet>
+    <servlet-name>AnnotatedServlet</servlet-name>
+    <servlet-class>org.superbiz.servlet.AnnotatedServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AnnotatedServlet</servlet-name>
+    <url-pattern>/annotated/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>JpaServlet</servlet-name>
+    <servlet-class>org.superbiz.servlet.JpaServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>JpaServlet</servlet-name>
+    <url-pattern>/jpa/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>JndiServlet</servlet-name>
+    <servlet-class>org.superbiz.servlet.JndiServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>JndiServlet</servlet-name>
+    <url-pattern>/jndi/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>RunAsServlet</servlet-name>
+    <servlet-class>org.superbiz.servlet.RunAsServlet</servlet-class>
+    <run-as>
+      <role-name>fake</role-name>
+    </run-as>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>RunAsServlet</servlet-name>
+    <url-pattern>/runas/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SecureServlet</servlet-name>
+    <servlet-class>org.superbiz.servlet.SecureServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SecureServlet</servlet-name>
+    <url-pattern>/secure/*</url-pattern>
+  </servlet-mapping>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Secure Area</web-resource-name>
+      <url-pattern>/secure/*</url-pattern>
+      <url-pattern>/runas/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>user</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <servlet>
+    <servlet-name>WebserviceServlet</servlet-name>
+    <servlet-class>org.superbiz.servlet.WebserviceServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>WebserviceServlet</servlet-name>
+    <url-pattern>/webservice/*</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>HelloPojoService</servlet-name>
+    <servlet-class>org.superbiz.servlet.HelloPojoService</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>HelloPojoService</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+
+  <login-config>
+    <auth-method>BASIC</auth-method>
+  </login-config>
+
+  <security-role>
+    <role-name>manager</role-name>
+  </security-role>
+
+  <security-role>
+    <role-name>user</role-name>
+  </security-role>
+
+  <env-entry>
+    <env-entry-name>web.xml/env-entry</env-entry-name>
+    <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value>WebValue</env-entry-value>
+  </env-entry>
+
+  <resource-ref>
+    <res-ref-name>web.xml/Data Source</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+
+  <resource-env-ref>
+    <resource-env-ref-name>web.xml/Queue</resource-env-ref-name>
+    <resource-env-ref-type>javax.jms.Queue</resource-env-ref-type>
+  </resource-env-ref>
+
+  <ejb-ref>
+    <ejb-ref-name>web.xml/EjbRemote</ejb-ref-name>
+    <ejb-ref-type>Session</ejb-ref-type>
+    <remote>org.superbiz.servlet.AnnotatedEJBRemote</remote>
+  </ejb-ref>
+
+  <ejb-local-ref>
+    <ejb-ref-name>web.xml/EjLocal</ejb-ref-name>
+    <ejb-ref-type>Session</ejb-ref-type>
+    <local>org.superbiz.servlet.AnnotatedEJBLocal</local>
+  </ejb-local-ref>
+
+  <persistence-unit-ref>
+    <persistence-unit-ref-name>web.xml/PersistenceUnit</persistence-unit-ref-name>
+    <persistence-unit-name>jpa-example</persistence-unit-name>
+  </persistence-unit-ref>
+
+  <persistence-context-ref>
+    <persistence-context-ref-name>web.xml/PersistenceContext</persistence-context-ref-name>
+    <persistence-unit-name>jpa-example</persistence-unit-name>
+    <persistence-context-type>Transactional</persistence-context-type>
+  </persistence-context-ref>
+</web-app>
+----
+
     

@@ -87,50 +87,55 @@ public class ChatBean implements MessageListener {
 
 ==  ejb-jar.xml
 
-    <ejb-jar xmlns="http://java.sun.com/xml/ns/javaee" metadata-complete="true">
-      <enterprise-beans>
-    
-        <message-driven>
-    
-          <ejb-name>ChatBean</ejb-name>
-          <ejb-class>org.superbiz.mdbdesc.ChatBean</ejb-class>
-    
-          <messaging-type>javax.jms.MessageListener</messaging-type>
-    
-          <activation-config>
-            <activation-config-property>
-              <activation-config-property-name>destination</activation-config-property-name>
-              <activation-config-property-value>ChatBean</activation-config-property-value>
-            </activation-config-property>
-            <activation-config-property>
-              <activation-config-property-name>destinationType</activation-config-property-name>
-              <activation-config-property-value>javax.jms.Queue</activation-config-property-value>
-            </activation-config-property>
-          </activation-config>
-    
-          <resource-ref>
-            <res-ref-name>java:comp/env/org.superbiz.mdbdesc.ChatBean/connectionFactory</res-ref-name>
-            <res-type>javax.jms.ConnectionFactory</res-type>
-            <injection-target>
-              <injection-target-class>org.superbiz.mdbdesc.ChatBean</injection-target-class>
-              <injection-target-name>connectionFactory</injection-target-name>
-            </injection-target>
-          </resource-ref>
-    
-          <resource-env-ref>
-            <resource-env-ref-name>java:comp/env/AnswerQueue</resource-env-ref-name>
-            <resource-env-ref-type>javax.jms.Queue</resource-env-ref-type>
-            <mapped-name>AnswerQueue</mapped-name>
-            <injection-target>
-              <injection-target-class>org.superbiz.mdbdesc.ChatBean</injection-target-class>
-              <injection-target-name>answerQueue</injection-target-name>
-            </injection-target>
-          </resource-env-ref>
-    
-        </message-driven>
-    
-      </enterprise-beans>
-    </ejb-jar>
+
+[source,xml]
+----
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee" metadata-complete="true">
+  <enterprise-beans>
+
+    <message-driven>
+
+      <ejb-name>ChatBean</ejb-name>
+      <ejb-class>org.superbiz.mdbdesc.ChatBean</ejb-class>
+
+      <messaging-type>javax.jms.MessageListener</messaging-type>
+
+      <activation-config>
+        <activation-config-property>
+          <activation-config-property-name>destination</activation-config-property-name>
+          <activation-config-property-value>ChatBean</activation-config-property-value>
+        </activation-config-property>
+        <activation-config-property>
+          <activation-config-property-name>destinationType</activation-config-property-name>
+          <activation-config-property-value>javax.jms.Queue</activation-config-property-value>
+        </activation-config-property>
+      </activation-config>
+
+      <resource-ref>
+        <res-ref-name>java:comp/env/org.superbiz.mdbdesc.ChatBean/connectionFactory</res-ref-name>
+        <res-type>javax.jms.ConnectionFactory</res-type>
+        <injection-target>
+          <injection-target-class>org.superbiz.mdbdesc.ChatBean</injection-target-class>
+          <injection-target-name>connectionFactory</injection-target-name>
+        </injection-target>
+      </resource-ref>
+
+      <resource-env-ref>
+        <resource-env-ref-name>java:comp/env/AnswerQueue</resource-env-ref-name>
+        <resource-env-ref-type>javax.jms.Queue</resource-env-ref-type>
+        <mapped-name>AnswerQueue</mapped-name>
+        <injection-target>
+          <injection-target-class>org.superbiz.mdbdesc.ChatBean</injection-target-class>
+          <injection-target-name>answerQueue</injection-target-name>
+        </injection-target>
+      </resource-env-ref>
+
+    </message-driven>
+
+  </enterprise-beans>
+</ejb-jar>
+----
+
     
 
 ==  ChatBeanTest

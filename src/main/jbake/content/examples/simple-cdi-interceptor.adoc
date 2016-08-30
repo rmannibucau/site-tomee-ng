@@ -82,12 +82,17 @@ Before we say "all done" there's one last thing we are left with ! To enable the
 
 Lets quickly put up a [beans.xml file]
 
-    <beans>
-      <interceptors>
-        <class>org.superbiz.cdi.bookshow.interceptors.LoggingInterceptor
-        </class>
-      </interceptors>
-    </beans>
+
+[source,xml]
+----
+<beans>
+  <interceptors>
+    <class>org.superbiz.cdi.bookshow.interceptors.LoggingInterceptor
+    </class>
+  </interceptors>
+</beans>
+----
+
 
  in META-INF
 

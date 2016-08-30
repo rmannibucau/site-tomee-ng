@@ -192,199 +192,203 @@ Which should create output like the following.
     Connection: close
     Server: OpenEJB/4.5.1 Linux/3.2.0-23-generic (amd64)
     
-    <response><value>Hi REST!</value></response>
-    INFO - Undeploying app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
-    INFO - Stopping network services
-    INFO - Stopping server services
-    INFO - Cannot find the configuration file [conf/openejb.xml].  Will attempt to create one for the beans deployed.
-    INFO - Configuring Service(id=Default Security Service, type=SecurityService, provider-id=Default Security Service)
-    INFO - Configuring Service(id=Default Transaction Manager, type=TransactionManager, provider-id=Default Transaction Manager)
-    INFO - Creating TransactionManager(id=Default Transaction Manager)
-    INFO - Creating SecurityService(id=Default Security Service)
-    INFO - Initializing network services
-    INFO - Creating ServerService(id=httpejbd)
-    INFO - Using 'print=true'
-    INFO - Using 'indent.xml=true'
-    INFO - Creating ServerService(id=cxf-rs)
-    INFO - Initializing network services
-    INFO - Starting service httpejbd
-    INFO - Started service httpejbd
-    INFO - Starting service cxf-rs
-    INFO - Started service cxf-rs
-    INFO -   ** Bound Services **
-    INFO -   NAME                 IP              PORT  
-    INFO -   httpejbd             127.0.0.1       4204  
-    INFO - -------
-    INFO - Ready!
-    INFO - Configuring enterprise application: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
-    INFO - Configuring Service(id=Default Managed Container, type=Container, provider-id=Default Managed Container)
-    INFO - Auto-creating a container for bean org.superbiz.rest.GreetingServiceTest: Container(type=MANAGED, id=Default Managed Container)
-    INFO - Creating Container(id=Default Managed Container)
-    INFO - Using directory /tmp for stateful session passivation
-    INFO - Enterprise application "/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest" loaded.
-    INFO - Assembling app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
-    INFO - Existing thread singleton service in SystemInstance() null
-    INFO - Created new singletonService org.apache.openejb.cdi.ThreadSingletonServiceImpl@54128635
-    INFO - Succeeded in installing singleton service
-    INFO - OpenWebBeans Container is starting...
-    INFO - Adding OpenWebBeansPlugin : [CdiPlugin]
-    INFO - All injection points are validated successfully.
-    INFO - OpenWebBeans Container has started, it took 11 ms.
-    INFO - Deployed Application(path=/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest)
-    INFO - Setting the server's publish address to be http://127.0.0.1:4204/test
-    INFO - REST Service: http://127.0.0.1:4204/test/greeting/.*  -> Pojo org.superbiz.rest.GreetingService
-    FINE - ******************* REQUEST ******************
-    POST http://localhost:4204/test/greeting/
-    Host=localhost:4204
-    Content-Length=97
-    User-Agent=Apache CXF 2.7.0
-    Connection=keep-alive
-    Accept=application/xml
-    Content-Type=application/xml
-    Pragma=no-cache
-    Cache-Control=no-cache
-    
-    <?xml version="1.0" encoding="UTF-8" standalone="yes"?><request><value>Hi REST!</value></request>
-    **********************************************
-    
-    FINE - HTTP/1.1 200 OK
-    Date: Fri, 09 Nov 2012 11:59:00 GMT
-    Content-Length: 44
-    Set-Cookie: EJBSESSIONID=7cb2246d-5738-4a85-aac5-c0fb5340d36a; Path=/
-    Content-Type: application/xml
-    Connection: close
-    Server: OpenEJB/4.5.1 Linux/3.2.0-23-generic (amd64)
-    
-    <response><value>hi rest!</value></response>
-    INFO - Undeploying app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
-    INFO - Stopping network services
-    INFO - Stopping server services
-    INFO - Cannot find the configuration file [conf/openejb.xml].  Will attempt to create one for the beans deployed.
-    INFO - Configuring Service(id=Default Security Service, type=SecurityService, provider-id=Default Security Service)
-    INFO - Configuring Service(id=Default Transaction Manager, type=TransactionManager, provider-id=Default Transaction Manager)
-    INFO - Creating TransactionManager(id=Default Transaction Manager)
-    INFO - Creating SecurityService(id=Default Security Service)
-    INFO - Initializing network services
-    INFO - Creating ServerService(id=httpejbd)
-    INFO - Using 'print=true'
-    INFO - Using 'indent.xml=true'
-    INFO - Creating ServerService(id=cxf-rs)
-    INFO - Initializing network services
-    INFO - Starting service httpejbd
-    INFO - Started service httpejbd
-    INFO - Starting service cxf-rs
-    INFO - Started service cxf-rs
-    INFO -   ** Bound Services **
-    INFO -   NAME                 IP              PORT  
-    INFO -   httpejbd             127.0.0.1       4204  
-    INFO - -------
-    INFO - Ready!
-    INFO - Configuring enterprise application: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
-    INFO - Configuring Service(id=Default Managed Container, type=Container, provider-id=Default Managed Container)
-    INFO - Auto-creating a container for bean org.superbiz.rest.GreetingServiceTest: Container(type=MANAGED, id=Default Managed Container)
-    INFO - Creating Container(id=Default Managed Container)
-    INFO - Using directory /tmp for stateful session passivation
-    INFO - Enterprise application "/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest" loaded.
-    INFO - Assembling app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
-    INFO - Existing thread singleton service in SystemInstance() null
-    INFO - Created new singletonService org.apache.openejb.cdi.ThreadSingletonServiceImpl@54128635
-    INFO - Succeeded in installing singleton service
-    INFO - OpenWebBeans Container is starting...
-    INFO - Adding OpenWebBeansPlugin : [CdiPlugin]
-    INFO - All injection points are validated successfully.
-    INFO - OpenWebBeans Container has started, it took 10 ms.
-    INFO - Deployed Application(path=/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest)
-    INFO - Setting the server's publish address to be http://127.0.0.1:4204/test
-    INFO - REST Service: http://127.0.0.1:4204/test/greeting/.*  -> Pojo org.superbiz.rest.GreetingService
-    FINE - ******************* REQUEST ******************
-    GET http://localhost:4204/test/greeting/
-    Host=localhost:4204
-    User-Agent=Apache CXF 2.7.0
-    Connection=keep-alive
-    Accept=application/json
-    Content-Type=*/*
-    Pragma=no-cache
-    Cache-Control=no-cache
-    
-    
-    **********************************************
-    
-    FINE - HTTP/1.1 200 OK
-    Date: Fri, 09 Nov 2012 11:59:00 GMT
-    Content-Length: 33
-    Set-Cookie: EJBSESSIONID=7112a057-fc4c-4f52-a556-1617320d2275; Path=/
-    Content-Type: application/json
-    Connection: close
-    Server: OpenEJB/4.5.1 Linux/3.2.0-23-generic (amd64)
-    
-    {"response":{"value":"Hi REST!"}}
-    INFO - Undeploying app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
-    INFO - Stopping network services
-    INFO - Stopping server services
-    INFO - Cannot find the configuration file [conf/openejb.xml].  Will attempt to create one for the beans deployed.
-    INFO - Configuring Service(id=Default Security Service, type=SecurityService, provider-id=Default Security Service)
-    INFO - Configuring Service(id=Default Transaction Manager, type=TransactionManager, provider-id=Default Transaction Manager)
-    INFO - Creating TransactionManager(id=Default Transaction Manager)
-    INFO - Creating SecurityService(id=Default Security Service)
-    INFO - Initializing network services
-    INFO - Creating ServerService(id=httpejbd)
-    INFO - Using 'print=true'
-    INFO - Using 'indent.xml=true'
-    INFO - Creating ServerService(id=cxf-rs)
-    INFO - Initializing network services
-    INFO - Starting service httpejbd
-    INFO - Started service httpejbd
-    INFO - Starting service cxf-rs
-    INFO - Started service cxf-rs
-    INFO -   ** Bound Services **
-    INFO -   NAME                 IP              PORT  
-    INFO -   httpejbd             127.0.0.1       4204  
-    INFO - -------
-    INFO - Ready!
-    INFO - Configuring enterprise application: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
-    INFO - Configuring Service(id=Default Managed Container, type=Container, provider-id=Default Managed Container)
-    INFO - Auto-creating a container for bean org.superbiz.rest.GreetingServiceTest: Container(type=MANAGED, id=Default Managed Container)
-    INFO - Creating Container(id=Default Managed Container)
-    INFO - Using directory /tmp for stateful session passivation
-    INFO - Enterprise application "/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest" loaded.
-    INFO - Assembling app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
-    INFO - Existing thread singleton service in SystemInstance() null
-    INFO - Created new singletonService org.apache.openejb.cdi.ThreadSingletonServiceImpl@54128635
-    INFO - Succeeded in installing singleton service
-    INFO - OpenWebBeans Container is starting...
-    INFO - Adding OpenWebBeansPlugin : [CdiPlugin]
-    INFO - All injection points are validated successfully.
-    INFO - OpenWebBeans Container has started, it took 10 ms.
-    INFO - Deployed Application(path=/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest)
-    INFO - Setting the server's publish address to be http://127.0.0.1:4204/test
-    INFO - REST Service: http://127.0.0.1:4204/test/greeting/.*  -> Pojo org.superbiz.rest.GreetingService
-    FINE - ******************* REQUEST ******************
-    POST http://localhost:4204/test/greeting/
-    Host=localhost:4204
-    Content-Length=97
-    User-Agent=Apache CXF 2.7.0
-    Connection=keep-alive
-    Accept=application/json
-    Content-Type=application/xml
-    Pragma=no-cache
-    Cache-Control=no-cache
-    
-    <?xml version="1.0" encoding="UTF-8" standalone="yes"?><request><value>Hi REST!</value></request>
-    **********************************************
-    
-    FINE - HTTP/1.1 200 OK
-    Date: Fri, 09 Nov 2012 11:59:01 GMT
-    Content-Length: 33
-    Set-Cookie: EJBSESSIONID=50cf1d2b-a940-4afb-8993-fff7f9cc6d83; Path=/
-    Content-Type: application/json
-    Connection: close
-    Server: OpenEJB/4.5.1 Linux/3.2.0-23-generic (amd64)
-    
-    {"response":{"value":"hi rest!"}}
-    INFO - Undeploying app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
-    INFO - Stopping network services
-    INFO - Stopping server services
-    
+
+[source,xml]
+----
+<response><value>Hi REST!</value></response>
+INFO - Undeploying app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
+INFO - Stopping network services
+INFO - Stopping server services
+INFO - Cannot find the configuration file [conf/openejb.xml].  Will attempt to create one for the beans deployed.
+INFO - Configuring Service(id=Default Security Service, type=SecurityService, provider-id=Default Security Service)
+INFO - Configuring Service(id=Default Transaction Manager, type=TransactionManager, provider-id=Default Transaction Manager)
+INFO - Creating TransactionManager(id=Default Transaction Manager)
+INFO - Creating SecurityService(id=Default Security Service)
+INFO - Initializing network services
+INFO - Creating ServerService(id=httpejbd)
+INFO - Using 'print=true'
+INFO - Using 'indent.xml=true'
+INFO - Creating ServerService(id=cxf-rs)
+INFO - Initializing network services
+INFO - Starting service httpejbd
+INFO - Started service httpejbd
+INFO - Starting service cxf-rs
+INFO - Started service cxf-rs
+INFO -   ** Bound Services **
+INFO -   NAME                 IP              PORT  
+INFO -   httpejbd             127.0.0.1       4204  
+INFO - -------
+INFO - Ready!
+INFO - Configuring enterprise application: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
+INFO - Configuring Service(id=Default Managed Container, type=Container, provider-id=Default Managed Container)
+INFO - Auto-creating a container for bean org.superbiz.rest.GreetingServiceTest: Container(type=MANAGED, id=Default Managed Container)
+INFO - Creating Container(id=Default Managed Container)
+INFO - Using directory /tmp for stateful session passivation
+INFO - Enterprise application "/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest" loaded.
+INFO - Assembling app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
+INFO - Existing thread singleton service in SystemInstance() null
+INFO - Created new singletonService org.apache.openejb.cdi.ThreadSingletonServiceImpl@54128635
+INFO - Succeeded in installing singleton service
+INFO - OpenWebBeans Container is starting...
+INFO - Adding OpenWebBeansPlugin : [CdiPlugin]
+INFO - All injection points are validated successfully.
+INFO - OpenWebBeans Container has started, it took 11 ms.
+INFO - Deployed Application(path=/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest)
+INFO - Setting the server's publish address to be http://127.0.0.1:4204/test
+INFO - REST Service: http://127.0.0.1:4204/test/greeting/.*  -> Pojo org.superbiz.rest.GreetingService
+FINE - ******************* REQUEST ******************
+POST http://localhost:4204/test/greeting/
+Host=localhost:4204
+Content-Length=97
+User-Agent=Apache CXF 2.7.0
+Connection=keep-alive
+Accept=application/xml
+Content-Type=application/xml
+Pragma=no-cache
+Cache-Control=no-cache
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><request><value>Hi REST!</value></request>
+**********************************************
+
+FINE - HTTP/1.1 200 OK
+Date: Fri, 09 Nov 2012 11:59:00 GMT
+Content-Length: 44
+Set-Cookie: EJBSESSIONID=7cb2246d-5738-4a85-aac5-c0fb5340d36a; Path=/
+Content-Type: application/xml
+Connection: close
+Server: OpenEJB/4.5.1 Linux/3.2.0-23-generic (amd64)
+
+<response><value>hi rest!</value></response>
+INFO - Undeploying app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
+INFO - Stopping network services
+INFO - Stopping server services
+INFO - Cannot find the configuration file [conf/openejb.xml].  Will attempt to create one for the beans deployed.
+INFO - Configuring Service(id=Default Security Service, type=SecurityService, provider-id=Default Security Service)
+INFO - Configuring Service(id=Default Transaction Manager, type=TransactionManager, provider-id=Default Transaction Manager)
+INFO - Creating TransactionManager(id=Default Transaction Manager)
+INFO - Creating SecurityService(id=Default Security Service)
+INFO - Initializing network services
+INFO - Creating ServerService(id=httpejbd)
+INFO - Using 'print=true'
+INFO - Using 'indent.xml=true'
+INFO - Creating ServerService(id=cxf-rs)
+INFO - Initializing network services
+INFO - Starting service httpejbd
+INFO - Started service httpejbd
+INFO - Starting service cxf-rs
+INFO - Started service cxf-rs
+INFO -   ** Bound Services **
+INFO -   NAME                 IP              PORT  
+INFO -   httpejbd             127.0.0.1       4204  
+INFO - -------
+INFO - Ready!
+INFO - Configuring enterprise application: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
+INFO - Configuring Service(id=Default Managed Container, type=Container, provider-id=Default Managed Container)
+INFO - Auto-creating a container for bean org.superbiz.rest.GreetingServiceTest: Container(type=MANAGED, id=Default Managed Container)
+INFO - Creating Container(id=Default Managed Container)
+INFO - Using directory /tmp for stateful session passivation
+INFO - Enterprise application "/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest" loaded.
+INFO - Assembling app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
+INFO - Existing thread singleton service in SystemInstance() null
+INFO - Created new singletonService org.apache.openejb.cdi.ThreadSingletonServiceImpl@54128635
+INFO - Succeeded in installing singleton service
+INFO - OpenWebBeans Container is starting...
+INFO - Adding OpenWebBeansPlugin : [CdiPlugin]
+INFO - All injection points are validated successfully.
+INFO - OpenWebBeans Container has started, it took 10 ms.
+INFO - Deployed Application(path=/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest)
+INFO - Setting the server's publish address to be http://127.0.0.1:4204/test
+INFO - REST Service: http://127.0.0.1:4204/test/greeting/.*  -> Pojo org.superbiz.rest.GreetingService
+FINE - ******************* REQUEST ******************
+GET http://localhost:4204/test/greeting/
+Host=localhost:4204
+User-Agent=Apache CXF 2.7.0
+Connection=keep-alive
+Accept=application/json
+Content-Type=*/*
+Pragma=no-cache
+Cache-Control=no-cache
+
+
+**********************************************
+
+FINE - HTTP/1.1 200 OK
+Date: Fri, 09 Nov 2012 11:59:00 GMT
+Content-Length: 33
+Set-Cookie: EJBSESSIONID=7112a057-fc4c-4f52-a556-1617320d2275; Path=/
+Content-Type: application/json
+Connection: close
+Server: OpenEJB/4.5.1 Linux/3.2.0-23-generic (amd64)
+
+{"response":{"value":"Hi REST!"}}
+INFO - Undeploying app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
+INFO - Stopping network services
+INFO - Stopping server services
+INFO - Cannot find the configuration file [conf/openejb.xml].  Will attempt to create one for the beans deployed.
+INFO - Configuring Service(id=Default Security Service, type=SecurityService, provider-id=Default Security Service)
+INFO - Configuring Service(id=Default Transaction Manager, type=TransactionManager, provider-id=Default Transaction Manager)
+INFO - Creating TransactionManager(id=Default Transaction Manager)
+INFO - Creating SecurityService(id=Default Security Service)
+INFO - Initializing network services
+INFO - Creating ServerService(id=httpejbd)
+INFO - Using 'print=true'
+INFO - Using 'indent.xml=true'
+INFO - Creating ServerService(id=cxf-rs)
+INFO - Initializing network services
+INFO - Starting service httpejbd
+INFO - Started service httpejbd
+INFO - Starting service cxf-rs
+INFO - Started service cxf-rs
+INFO -   ** Bound Services **
+INFO -   NAME                 IP              PORT  
+INFO -   httpejbd             127.0.0.1       4204  
+INFO - -------
+INFO - Ready!
+INFO - Configuring enterprise application: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
+INFO - Configuring Service(id=Default Managed Container, type=Container, provider-id=Default Managed Container)
+INFO - Auto-creating a container for bean org.superbiz.rest.GreetingServiceTest: Container(type=MANAGED, id=Default Managed Container)
+INFO - Creating Container(id=Default Managed Container)
+INFO - Using directory /tmp for stateful session passivation
+INFO - Enterprise application "/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest" loaded.
+INFO - Assembling app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
+INFO - Existing thread singleton service in SystemInstance() null
+INFO - Created new singletonService org.apache.openejb.cdi.ThreadSingletonServiceImpl@54128635
+INFO - Succeeded in installing singleton service
+INFO - OpenWebBeans Container is starting...
+INFO - Adding OpenWebBeansPlugin : [CdiPlugin]
+INFO - All injection points are validated successfully.
+INFO - OpenWebBeans Container has started, it took 10 ms.
+INFO - Deployed Application(path=/opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest)
+INFO - Setting the server's publish address to be http://127.0.0.1:4204/test
+INFO - REST Service: http://127.0.0.1:4204/test/greeting/.*  -> Pojo org.superbiz.rest.GreetingService
+FINE - ******************* REQUEST ******************
+POST http://localhost:4204/test/greeting/
+Host=localhost:4204
+Content-Length=97
+User-Agent=Apache CXF 2.7.0
+Connection=keep-alive
+Accept=application/json
+Content-Type=application/xml
+Pragma=no-cache
+Cache-Control=no-cache
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><request><value>Hi REST!</value></request>
+**********************************************
+
+FINE - HTTP/1.1 200 OK
+Date: Fri, 09 Nov 2012 11:59:01 GMT
+Content-Length: 33
+Set-Cookie: EJBSESSIONID=50cf1d2b-a940-4afb-8993-fff7f9cc6d83; Path=/
+Content-Type: application/json
+Connection: close
+Server: OpenEJB/4.5.1 Linux/3.2.0-23-generic (amd64)
+
+{"response":{"value":"hi rest!"}}
+INFO - Undeploying app: /opt/dev/openejb/openejb-trunk/examples/GreetingServiceTest
+INFO - Stopping network services
+INFO - Stopping server services
+
+
 
 
 

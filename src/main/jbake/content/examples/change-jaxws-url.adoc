@@ -50,15 +50,20 @@ We decide to deploy to /tool/rot13 url.
 
 To do so we first define it in openejb-jar.xml:
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <openejb-jar xmlns="http://www.openejb.org/xml/ns/openejb-jar-2.1">
-      <enterprise-beans>
-        <session>
-          <ejb-name>Rot13</ejb-name>
-          <web-service-address>/tool/rot13</web-service-address>
-        </session>
-      </enterprise-beans>
-    </openejb-jar>
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<openejb-jar xmlns="http://www.openejb.org/xml/ns/openejb-jar-2.1">
+  <enterprise-beans>
+    <session>
+      <ejb-name>Rot13</ejb-name>
+      <web-service-address>/tool/rot13</web-service-address>
+    </session>
+  </enterprise-beans>
+</openejb-jar>
+----
+
 
 
 It is not enough since by default TomEE deploys the webservices in a subcontext called webservices. To skip it

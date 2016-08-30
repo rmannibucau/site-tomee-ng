@@ -7,7 +7,7 @@
 Example alternate-descriptors can be browsed at https://github.com/apache/tomee/tree/master/examples/alternate-descriptors
 
 
-See the [Alternate Descriptors](../../alternate-descriptors.html) page for the full details of how this feature works.
+See the link:../../alternate-descriptors.html[Alternate Descriptors] page for the full details of how this feature works.
 
 For our example we'll use the standard "moviefun" code which contains a `Movie` entity and `Movies` session bean.  To add a twist
 for testing and demonstrate alternate descriptors, we will create an interceptor that will be used only in our test cases.
@@ -24,15 +24,20 @@ That gives us the following files in our project:
 
 The normal `ejb-jar.xml` simply contains `<ejb-jar/>`, however the `test.ejb-jar.xml` we add an extra interceptor:
 
-    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-    <ejb-jar xmlns="http://java.sun.com/xml/ns/javaee">
-      <assembly-descriptor>
-        <interceptor-binding>
-          <ejb-name>Movies</ejb-name>
-          <interceptor-class>org.superbiz.altdd.MoviesTest$Interceptor</interceptor-class>
-        </interceptor-binding>
-      </assembly-descriptor>
-    </ejb-jar>
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee">
+  <assembly-descriptor>
+    <interceptor-binding>
+      <ejb-name>Movies</ejb-name>
+      <interceptor-class>org.superbiz.altdd.MoviesTest$Interceptor</interceptor-class>
+    </interceptor-binding>
+  </assembly-descriptor>
+</ejb-jar>
+----
+
 
 ==  The TestCase
 
@@ -103,7 +108,7 @@ To enable our `test.ejb-jar.xml` in the test case, we simply set the `openejb.al
          }
      }
 
-As noted in [the documentation](../../alternate-descriptors.html), several prefixes can be used at once.
+As noted in link:../../alternate-descriptors.html[the documentation], several prefixes can be used at once.
 
 =  Running
 

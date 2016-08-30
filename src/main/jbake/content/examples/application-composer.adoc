@@ -13,11 +13,16 @@ It involves no classpath scanning at all.  If you want something to be in the ap
 With the `ApplicationComposer` you can do identical testing that OpenEJB uses internally, but with limited dependency on OpenEJB itself.  The main dependency is on the code
 that is used to build the actual applications:
 
-    <dependency>
-      <groupId>org.apache.openejb</groupId>
-      <artifactId>openejb-jee</artifactId>
-      <version>4.0.0-beta-1</version>
-    </dependency>
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.openejb</groupId>
+  <artifactId>openejb-jee</artifactId>
+  <version>4.0.0-beta-1</version>
+</dependency>
+----
+
 
 =  Composing an Application
 

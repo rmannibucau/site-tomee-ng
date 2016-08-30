@@ -100,7 +100,12 @@ public interface AttachmentWs {
 
 ==  ejb-jar.xml
 
-    <ejb-jar/>
+
+[source,xml]
+----
+<ejb-jar/>
+----
+
 
 ==  AttachmentTest
 

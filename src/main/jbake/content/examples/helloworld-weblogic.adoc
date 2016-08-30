@@ -73,16 +73,26 @@ public interface HelloEjbLocalHome extends EJBLocalHome {
 
 ==  ejb-jar.xml
 
-    <ejb-jar/>
+
+[source,xml]
+----
+<ejb-jar/>
+----
+
 
 ==  weblogic-ejb-jar.xml
 
-    <weblogic-ejb-jar>
-      <weblogic-enterprise-bean>
-        <ejb-name>HelloBean</ejb-name>
-        <local-jndi-name>MyHello</local-jndi-name>
-      </weblogic-enterprise-bean>
-    </weblogic-ejb-jar>
+
+[source,xml]
+----
+<weblogic-ejb-jar>
+  <weblogic-enterprise-bean>
+    <ejb-name>HelloBean</ejb-name>
+    <local-jndi-name>MyHello</local-jndi-name>
+  </weblogic-enterprise-bean>
+</weblogic-ejb-jar>
+----
+
     
     
 

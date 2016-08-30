@@ -38,7 +38,12 @@ public class Calculator {
 
 ==  ejb-jar.xml
 
-    <ejb-jar/>
+
+[source,xml]
+----
+<ejb-jar/>
+----
+
 
 ==  CalculatorTest
 
@@ -97,4 +102,9 @@ public class CalculatorTest {
 
 ==  ejb-jar.xml
 
-    <ejb-jar/>
+
+[source,xml]
+----
+<ejb-jar/>
+----
+
