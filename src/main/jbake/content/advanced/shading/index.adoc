@@ -26,7 +26,7 @@ Here is a maven shade plugin configuration working for most cases:
         <dependencyReducedPomLocation>${project.build.directory}/reduced-pom.xml</dependencyReducedPomLocation>
         <transformers>
           <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-            <mainClass>org.apache.tomee.embedded.Main</mainClass>
+            <mainClass>org.apache.tomee.embedded.FatApp</mainClass>
           </transformer>
           <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
             <resource>META-INF/cxf/bus-extensions.txt</resource>
@@ -48,7 +48,7 @@ Here is a maven shade plugin configuration working for most cases:
     <dependency>
       <groupId>org.apache.openwebbeans</groupId>
       <artifactId>openwebbeans-maven</artifactId>
-      <version>1.6.4/version>
+      <version>1.7.0/version>
     </dependency>
   </dependencies>
 </plugin>
@@ -75,7 +75,7 @@ And you can run it:
 java -jar myapp-1.0-SNAPSHOT.jar
 ----
 
-== Fat Jars witrh Gradle
+== Fat Jars with Gradle
 
 With gradle you can rely on either jar plugin, fatjar plugin or shadowjar plugin. Last one is likely the closer to maven shade plugin
 so that's the one used for next sample:
@@ -92,7 +92,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
-        classpath 'org.apache.openwebbeans:openwebbeans-gradle:1.6.4-SNAPSHOT'
+        classpath 'org.apache.openwebbeans:openwebbeans-gradle:1.7.0'
     }
 }
 
@@ -189,7 +189,7 @@ shadowJar {
 
     // ensure we define the expected Main (if you wrap tomee main use your own class)
     manifest {
-        attributes 'Main-Class': 'org.apache.tomee.embedded.Main'
+        attributes 'Main-Class': 'org.apache.tomee.embedded.FatApp'
     }
 }
 ----
