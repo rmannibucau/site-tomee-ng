@@ -159,6 +159,7 @@ public class JBake {
 
             try (final Container container = new Container(new Configuration() {{
                 setWebResourceCached(false);
+                property("openejb.additional.exclude", "logback,jbake");
             }}).deployClasspathAsWebApp(null, destination)) {
                 System.out.println("Started on http://localhost:" + container.getConfiguration().getHttpPort());
 

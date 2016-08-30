@@ -45,7 +45,7 @@ public class Examples {
     private static final String DEFAULT_README = "No README.md yet, be the first to contribute one!";
 
     // don't load it for each page, would be pretty inefficient
-    private static final Collection<Example> CACHE = new ArrayList<>();
+    private static final List<Example> CACHE = new ArrayList<>();
     private static final String CACHE_FILE = "examples.cache";
 
     public static void populateTree() {
@@ -65,7 +65,7 @@ public class Examples {
         });
     }
 
-    public static Collection<Example> load() {
+    public static List<Example> load() {
         if (!CACHE.isEmpty()) {
             return CACHE;
         }
