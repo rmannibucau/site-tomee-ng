@@ -22,17 +22,24 @@
   </div>
   <div class="vspace">&nbsp;</div>
   <div class="col-md-12 examples text-center">
-    <% def all = org.apache.tomee.website.Examples.load() %>
-    <ul class="col-sm-6 list-unstyled">
-      <% all.subList(0, (int) all.size() / 2).each {example -> %>
-      <li><a href="${example.name}.html">${example.name}</a></li>
-      <% } %>
-    </ul>
-    <ul class="col-sm-6 list-unstyled">
-      <% all.subList((int) all.size() / 2, all.size()).each {example -> %>
-      <li><a href="${example.name}.html">${example.name}</a></li>
-      <% } %>
-    </ul>
+    <%
+    def all = org.apache.tomee.website.Examples.loadAll()
+    def keys = []
+    keys.addAll(all.all.keySet())
+
+    [keys.subList(0, (int) keys.size() / 2), keys.subList((int) keys.size() / 2, keys.size())].each { list ->
+      keys.subList(0, (int) keys.size() / 2).each { tag ->
+      examples = all.all[tag]
+    %>
+    <div class="col-sm-6">
+      <h3>${tag}</h3>
+      <ul class="list-unstyled">
+        <% examples.each {example -> %>
+        <li><a href="${example.name}.html">${example.name}</a></li>
+        <% } %>
+      </ul>
+    </div>
+    <% }} %>
   </div>
 </div>
 </div>

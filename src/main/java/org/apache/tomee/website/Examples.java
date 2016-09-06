@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import org.apache.johnzon.jaxrs.JohnzonProvider;
 import org.apache.johnzon.mapper.JohnzonProperty;
 import org.apache.johnzon.mapper.MapperBuilder;
-import org.apache.johnzon.mapper.reflection.JohnzonParameterizedType;
 
 import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotFoundException;
@@ -30,10 +29,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
+import static java.util.Arrays.asList;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
@@ -45,12 +48,16 @@ public class Examples {
     private static final String DEFAULT_README = "No README.md yet, be the first to contribute one!";
 
     // don't load it for each page, would be pretty inefficient
-    private static final List<Example> CACHE = new ArrayList<>();
+    private static final Map<String, Collection<Example>> CACHE = new TreeMap<>();
     private static final String CACHE_FILE = "examples.cache";
+    private static final Collection<String> EXCLUDED_KEYWORDS = new HashSet<>(asList(
+            "with", "jvm", "preview", "demo", "to", "a", "access", "and", "app", "application", "auto", "basic", "bean", "by", "change", "complete",
+            "composer", "custom", "declared", "example", "handling", "in", "by", "change", "simple", "interface"));
 
     public static void populateTree() {
         final String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        load().forEach(e -> {
+        load();
+        CACHE.forEach((tag, examples) -> examples.forEach(e -> {
             try (final Writer w = new FileWriter("src/main/jbake/content/examples/" + e.getName() + ".adoc")) {
                 w.write("= " + findTitle(e.getName(), e.getReadme()) + "\n" +
                         ":jbake-date: " + date + "\n" +
@@ -62,23 +69,29 @@ public class Examples {
             } catch (final IOException ioe) {
                 throw new IllegalStateException(ioe);
             }
-        });
+        }));
     }
 
-    public static List<Example> load() {
+    public static ExampleWrapper loadAll() {
+        load();
+        return new ExampleWrapper(CACHE, CACHE.values().stream().mapToInt(Collection::size).sum());
+    }
+
+    public static void load() {
         if (!CACHE.isEmpty()) {
-            return CACHE;
+            return;
         }
 
         final File cache = new File(CACHE_FILE);
         if (cache.isFile()) {
             System.out.println("Reading examples from cache, delete " + CACHE_FILE + " if you want to reload them");
             try (final InputStream is = new FileInputStream(cache)) {
-                CACHE.addAll(new MapperBuilder().build().readCollection(is, new JohnzonParameterizedType(List.class, Example.class)));
+                final ExampleWrapper wrapper = new MapperBuilder().build().readObject(is, ExampleWrapper.class);
+                CACHE.putAll(wrapper.getAll());
             } catch (IOException e) {
                 throw new IllegalArgumentException(e);
             }
-            return CACHE;
+            return;
         }
 
         final Client client = ClientBuilder.newClient().register(new JohnzonProvider<>());
@@ -89,29 +102,55 @@ public class Examples {
             if (auth != null) {
                 request.header("Authorization", auth);
             }
-            CACHE.addAll(request
+            request
                     .get(new GenericType<Collection<GithubContentItem>>() {
                     }).stream().filter(i -> "dir".equals(i.getType()))
                     .parallel()
                     .sorted((i1, i2) -> i1.getName().compareTo(i2.getName()))
                     .map(i -> new Example(i.getName(), i.getHtmlUrl(), loadReadme(auth, github, i)))
-                    .collect(toList()));
+                    .forEach(example -> {
+                        final Collection<String> split = Stream.of(example.getName()
+                                .replace("application-composer", "applicationcomposer")
+                                .replace("configproperty", "config")
+                                .replace("descriptors", "descriptor")
+                                .replace("ejbs", "ejb")
+                                .replace("env-entry", "enventry")
+                                .replace("events", "event")
+                                .replace("interceptors", "interceptor")
+                                .split("-"))
+                                .filter(s -> !EXCLUDED_KEYWORDS.contains(s))
+                                .filter(s -> {
+                                    try {
+                                        Integer.parseInt(s);
+                                        return false;
+                                    } catch (final NumberFormatException nfe) {
+                                        return true;
+                                    }
+                                })
+                                .collect(toList());
+                        if (split.isEmpty()) {
+                            CACHE.computeIfAbsent("Unclassified", k -> new ArrayList<>()).add(example);
+                        } else {
+                            for (final String keyword : split) {
+                                CACHE.computeIfAbsent(keyword, k -> new ArrayList<>()).add(example);
+                            }
+                        }
+                    });
 
             // debug stats
             final int totalExamples = CACHE.size();
-            final long exampleMissingReadme = CACHE.stream().filter(e -> DEFAULT_README.equals(e.getReadme())).count();
+            final long exampleMissingReadme = CACHE.values().stream().flatMap(Collection::stream).filter(e -> DEFAULT_README.equals(e.getReadme())).count();
             System.out.println(exampleMissingReadme + "/" + totalExamples + " miss a README.md");
-            CACHE.stream().filter(e -> DEFAULT_README.equals(e.getReadme())).forEach(e -> System.out.println("  - " + e.getName()));
+            CACHE.values().stream().flatMap(Collection::stream).filter(e -> DEFAULT_README.equals(e.getReadme())).forEach(e -> System.out.println("  - " + e.getName()));
 
             try (final OutputStream os = new FileOutputStream(CACHE_FILE)) {
-                new MapperBuilder().build().writeArray(load(), os);
+                new MapperBuilder().setPretty(true).build().writeObject(loadAll(), os);
             } catch (final IOException e) {
                 throw new IllegalArgumentException(e);
             }
         } finally {
             client.close();
         }
-        return CACHE;
     }
 
     private static String loadReadme(final String auth, final WebTarget github, final GithubContentItem i) {
@@ -252,6 +291,12 @@ public class Examples {
 
     public static void main(final String[] args) {
         populateTree();
+    }
+
+    @Data
+    public static class ExampleWrapper {
+        private final Map<String, Collection<Example>> all;
+        private final int total;
     }
 
     @Data

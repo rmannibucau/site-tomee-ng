@@ -1,5 +1,5 @@
 = Transaction Rollback
-:jbake-date: 2016-08-30
+:jbake-date: 2016-09-06
 :jbake-type: page
 :jbake-tomeepdf:
 :jbake-status: published
