@@ -54,6 +54,10 @@ The default configuration allows to start tomee without issue but you can desire
 |roles|-|a map of role/users
 |tempDir|${java.io.tmpdir}/tomee-embedded_${timestamp}|tomcat needs a docBase, in case you don't provide one one will be created there
 |webResourceCached |true|should web resources be cached by tomcat (set false in frontend dev)
+|configuration-location|-|location (classpath or file) to a .properties to configure the server
+[pre-task|-|Runnable or org.apache.tomee.embedded.LifecycleTask implementations to execute before the container starts
+|classes-filter|-|implementation of a custom xbean Filter to ignore not desired classes during scanning
+|basic|-|set /* under BASIC authentication for the realm "Security", authentication role being "*"
 |===
 
 Note: passing to `Container` constructor a `Configuration` it will start the container automatically but using `setup(Configuration)`
@@ -99,3 +103,121 @@ These different uber jars are interesting in mainly 2 cases:
 - you run your application using `--path` option
 
 NOTE: if you already do a custom shade/fatjar this is not really impacting since you can depend on `tomee-embedded` and exclude/include what you want.
+
+== FatApp a shortcut main
+
+`FatApp` main (same package as tomee embedded `Main`) just wraps the default main ensuring:
+
+- ̀`--as-war` is used
+- ̀`--single-classloader` is used
+- `--configuration-location=tomee-embedded.properties` is set if `tomee-embedded.properties` is found in the classpath
+
+== configuration-location
+
+`--configuration-location` option allows to simplify the configuration of tomee embedded through properties.
+
+Here are the recognized entries (they match the configuration, see org.apache.tomee.embedded.Configuration for the detail):
+
+|===
+|Name|
+|http|
+|https|
+|stop|
+|host|
+|dir|
+|serverXml|
+|keepServerXmlAsThis|
+|quickSession|
+|skipHttp|
+|ssl|
+|http2|
+|webResourceCached|
+|withEjbRemote|
+|deployOpenEjbApp|
+|keystoreFile|
+|keystorePass|
+|keystoreType|
+|clientAuth|
+|keyAlias|
+|sslProtocol|
+|webXml|
+|tempDir|
+|classesFilter|
+|conf|
+|properties.x (set container properties x with the associated value)|
+|users.x (for default in memory realm add the user x with its password - the value)|
+|roles.x (for default in memory realm add the role x with its comma separated users - the value)|
+|connector.x (set the property x on the connector)|
+|realm=fullyqualifiedname,realm.prop=xxx (define a custom realm with its configuration)|
+|login=,login.prop=xxx (define a org.apache.tomee.embedded.LoginConfigBuilder == define a LoginConfig)|
+|securityConstraint=,securityConstraint.prop=xxx (define a org.apache.tomee.embedded.SecurityConstaintBuilder == define webapp security)|
+|configurationCustomizer.alias=,configurationCustomizer.alias.class=class,configurationCustomizer.alias.prop=xxx (define a ConfigurationCustomizer)|
+|===
+
+Here is a sample to add BASIC security on `/api/*`:
+
+[source]
+----
+# security configuration
+securityConstraint =
+securityConstraint.authConstraint = true
+securityConstraint.authRole = **
+securityConstraint.collection = api:/api/*
+
+login =
+login.realmName = app
+login.authMethod = BASIC
+
+realm = org.apache.catalina.realm.JAASRealm
+realm.appName = app
+
+properties.java.security.auth.login.config = configuration/login.jaas
+----
+
+And here a configuration to exclude jackson packages from scanning and use log4j2 as main logger (needs it as dependency):
+
+[source]
+----
+properties.openejb.log.factory = log4j2
+properties.openejb.container.additional.include = com.fasterxml.jackson,org.apache.logging.log4j
+----
+
+== Application Runner
+
+SInce TomEE 7.0.2, TomEE provide a light ApplicationComposer integration for TomEE Embedded (all features are not yet supported but the main ones are):
+`org.apache.tomee.embedded.TomEEEmbeddedApplicationRunner`. It relies on the definition of an `@Application`:
+
+[source,java]
+----
+@Application
+@Classes(context = "app")
+@ContainerProperties(@ContainerProperties.Property(name = "t", value = "set"))
+@TomEEEmbeddedApplicationRunner.LifecycleTasks(MyTask.class) // can start a ftp/sftp/elasticsearch/mongo/... server before tomee
+@TomEEEmbeddedApplicationRunner.Configurers(SetMyProperty.class)
+public class TheApp {
+    @RandomPort("http")
+    private int port;
+
+    @RandomPort("http")
+    private URL base;
+
+    @org.apache.openejb.testing.Configuration
+    public Properties add() {
+        return new PropertiesBuilder().p("programmatic", "property").build();
+    }
+
+    @PostConstruct
+    public void appStarted() {
+        // ...
+    }
+}
+----
+
+Then just start it with:
+
+[source,java]
+----
+TomEEEmbeddedApplicationRunner.run(TheApp.class, "some arg1", "other arg");
+----
+
+TIP: `@Classes(values)` and `@Jars` are supported too which can avoid a huge scanning if you run with a lot of not CDI dependencies which would boost the startup of your application.
