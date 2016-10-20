@@ -42,6 +42,19 @@ This context factory supports few more options when *you boot the container* cre
 |===
 
 IMPORTANT: `Context.SECURITY_*` shouldn't be used for runtime lookups with `LocalInitialContextFactory`, it would leak a security identity and make the runtime no more thread safe.
+This factory was deprecated starting with 7.0.2 in favor of `org.apache.openejb.core.OpenEJBInitialContextFactory`.
+
+== OpenEJBInitialContextFactory
+
+This factory allows you to access local EJB and container resources.
+
+[source,java]
+----
+Properties properties = new Properties();
+properties.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.apache.openejb.core.OpenEJBInitialContextFactory");
+final Context ctx = new InitialContext(properties);
+ctx.lookup("java:....");
+----
 
 == RemoteInitialContextFactory
 
